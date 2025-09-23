@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AdsAstraTimeline.css";
+import DataVerseSection from "./DataVerseSection";
 
 const products = new Array(11).fill({
-  title: "Ads-astra",
+  title: "DataVerse",
   desc: "Learn about your users",
 });
 
 const AdsAstraTimeline = () => {
+  const [showDataVerseTimeline, setShowDataVerseTimeline] = useState(false);
+
+  const handleCardClick = () => {
+    setShowDataVerseTimeline(true);
+  };
+
+  const handleClose = () => {
+    setShowDataVerseTimeline(false);
+  };
+
   return (
     <div className="timeline-container">
-<h2 className="timeline-title">
-  Ads-astra <br />
-  <span className="timeline-subtitle">Learn about your users</span>
-</h2>
+      <h2 className="timeline-title">
+        Ads-astra <br />
+        <span className="timeline-subtitle">Learn about your users</span>
+      </h2>
 
       {/* SVG background */}
       <svg
@@ -36,8 +47,15 @@ const AdsAstraTimeline = () => {
         {/* Top row: 4 cards */}
         <div className="row top-row">
           {products.slice(0, 4).map((p, i) => (
-            <div key={i} className="product-card">
-              <div className="icon">📊</div>
+            <div key={i} className="product-card"               onClick={handleCardClick}
+>
+              <div className="icon w-10 h-10">
+                <img
+                  src="/image.png"
+                  alt="Bar Chart Icon"
+                  className="w-full h-full object-contain"
+                />
+              </div>
               <h4>{p.title}</h4>
               <p>{p.desc}</p>
             </div>
@@ -47,14 +65,35 @@ const AdsAstraTimeline = () => {
         {/* Bottom row: 7 cards */}
         <div className="row bottom-row">
           {products.slice(4, 11).map((p, i) => (
-            <div key={i} className="product-card">
-              <div className="icon">📊</div>
+            <div
+              key={i}
+              className="product-card"
+            >
+              <div className="icon w-10 h-10">
+                <img
+                  src="/image.png"
+                  alt="Bar Chart Icon"
+                  className="w-full h-full object-contain"
+                />
+              </div>
               <h4>{p.title}</h4>
               <p>{p.desc}</p>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Show DataVerse timeline when clicked */}
+      {showDataVerseTimeline && (
+        <div
+          className={`data-verse-timeline-container ${
+            showDataVerseTimeline ? "fade-in" : ""
+          }`}
+          style={{ marginTop: "75px" }}
+        >
+          <DataVerseSection  />
+        </div>
+      )}
     </div>
   );
 };

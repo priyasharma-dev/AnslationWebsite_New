@@ -18,7 +18,6 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 const theme = createTheme({
     typography: { fontFamily: "'Inter', sans-serif" },
     palette: {
-        // mode: "dark",
         primary: { main: "#2a6aff", light: "#4db0ff" },
         background: { default: "#030c1f", paper: "#040e2a" },
         text: { primary: "#fff", secondary: "#cbd5e1" },
@@ -33,7 +32,7 @@ function AlertItem({ color, label, icon }) {
                 display: "flex",
                 alignItems: "center",
                 gap: 1.5,
-                bgcolor: "rgba(130, 29, 29, 0.06)",
+                bgcolor: "rgba(255,255,255,0.05)",
                 borderRadius: "9999px",
                 px: 2,
                 py: 1,
@@ -45,8 +44,8 @@ function AlertItem({ color, label, icon }) {
         >
             <Box
                 sx={{
-                    width: 24,
-                    height: 24,
+                    width: 22,
+                    height: 22,
                     borderRadius: "50%",
                     bgcolor: color,
                     flexShrink: 0,
@@ -57,7 +56,7 @@ function AlertItem({ color, label, icon }) {
                     fontSize: 14,
                 }}
             >
-                {icon === "close" ? <CloseIcon fontSize="small" /> : null}
+                {icon === "close" ? <CloseIcon sx={{ fontSize: 14 }} /> : null}
             </Box>
             {label}
         </Box>
@@ -71,19 +70,24 @@ function AlertsBox({ title, alerts, sx }) {
             elevation={0}
             sx={{
                 position: "relative",
-                width: 420,
-                p: 3,
-                borderRadius: 3,
+                width: 360,
+                p: 2.5,
+                borderRadius: 4,
                 color: "white",
                 userSelect: "none",
                 border: "1px solid rgba(163,177,212,0.22)",
                 background:
-                    "linear-gradient(180deg, rgba(16,76,194,.95), rgba(8,28,82,.95))",
-                boxShadow: "0 16px 48px rgba(0,0,0,.55)",
+                    "linear-gradient(180deg, rgba(16,76,194,.9), rgba(8,28,82,.95))",
+                boxShadow: "0 10px 30px rgba(0,0,0,.55)",
                 ...sx,
             }}
         >
-            <Typography variant="body2" fontWeight={700} mb={2} sx={{ textAlign: "left" }}>
+            <Typography
+                variant="body2"
+                fontWeight={600}
+                mb={2}
+                sx={{ textAlign: "left", fontSize: 15 }}
+            >
                 {title}
             </Typography>
 
@@ -96,18 +100,16 @@ function AlertsBox({ title, alerts, sx }) {
             <Box
                 sx={{
                     position: "absolute",
-                    top: 12,
-                    right: 12,
+                    top: 10,
+                    right: 10,
                     display: "flex",
                     gap: 1,
                     color: "#cbd5e1",
-                    fontSize: 18,
                     cursor: "pointer",
-                    userSelect: "none",
                 }}
             >
-                <ChevronLeftIcon />
-                <ChevronRightIcon />
+                <ChevronLeftIcon fontSize="small" />
+                <ChevronRightIcon fontSize="small" />
             </Box>
         </Paper>
     );
@@ -117,27 +119,30 @@ function AlertsBox({ title, alerts, sx }) {
 export default function DataVerseSection() {
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{  p: { xs: 2, md: 6 } }}>
-                {/* Glass container: everything lives inside here */}
+            <Box sx={{ p: { xs: 2, md: 6 } }}>
+                <h2 className="timeline-title">
+                    Data verse <br />
+                    <span className="timeline-subtitle">Learn about your users</span>
+                </h2>
                 <Box
                     sx={{
                         position: "relative",
                         mx: "auto",
-                        maxWidth: 1260,
+                        maxWidth: 1440,
                         width: "100%",
                         p: { xs: 3, md: 6 },
                         borderRadius: 6,
                         border: "1px solid rgba(255, 255, 255, 0.2)",
                         background:
-                            "linear-gradient(180deg, rgba(18,75,210,1) 0%, rgba(10,30,80,0.95) 5%, rgba(0, 0, 0, 1) 100%)",
-                        boxShadow: "0 20px 60px rgba(0,0,0,.55)",
+                            "linear-gradient(180deg, rgba(20,35,75,1) 0%, rgba(3,12,31,1) 100%)",
+                        boxShadow: "0 20px 60px rgba(0,0,0,.65)",
                         color: "white",
-                        overflow: "hidden",
                         display: "grid",
-                        gridTemplateColumns: { xs: "1fr", lg: "1fr 460px" },
-                        columnGap: { xs: 3, md: 6 },
+                        gridTemplateColumns: { xs: "1fr", lg: "1fr 500px" }, // also increase right column a bit
+                        columnGap: { xs: 3, md: 8 }, // more spacing between text and cards
                         rowGap: 4,
                         alignItems: "start",
+                        mt: 8,
                     }}
                 >
 
@@ -158,13 +163,13 @@ export default function DataVerseSection() {
                         <CloseIcon fontSize="small" />
                     </IconButton>
 
-                    {/* LEFT: all copy left-aligned */}
+                    {/* LEFT: Text + buttons */}
                     <Box sx={{ textAlign: "left" }}>
                         <Typography
                             variant="h2"
                             sx={{
-                                fontSize: { xs: 36, md: 56 },
-                                lineHeight: 1.05,
+                                fontSize: { xs: 32, md: 52 },
+                                lineHeight: 1.1,
                                 fontWeight: 800,
                                 mb: 2,
                             }}
@@ -176,24 +181,27 @@ export default function DataVerseSection() {
                             component="ul"
                             sx={{
                                 listStyleType: "disc",
-                                pl: 4,
+                                pl: 3,
                                 mb: 4,
-                                fontSize: 18,
-                                lineHeight: "28px",
-                                fontWeight: 400,
+                                fontSize: 17,
+                                lineHeight: "26px",
                             }}
                         >
-                            <li>Critical alerts (e.g., lab results flagged, patient emergencies).</li>
-                            <li>System reminders (e.g., "Follow-up overdue for Patient X").</li>
+                            <li>
+                                Critical alerts (e.g., lab results flagged, patient emergencies).
+                            </li>
+                            <li>
+                                System reminders (e.g., "Follow-up overdue for Patient X").
+                            </li>
                         </Box>
 
                         <Stack direction="row" spacing={1.5} useFlexGap flexWrap="wrap" sx={{ mb: 3 }}>
                             <Chip
                                 label="Critical alerts in red to take quick action"
                                 sx={{
-                                    bgcolor: "#6b7280",
+                                    bgcolor: "#4b5563",
                                     color: "white",
-                                    fontWeight: 700,
+                                    fontWeight: 600,
                                     fontSize: 15,
                                     height: 36,
                                     borderRadius: 3,
@@ -202,9 +210,9 @@ export default function DataVerseSection() {
                             <Chip
                                 label="Collapsable reminders"
                                 sx={{
-                                    bgcolor: "#6b7280",
+                                    bgcolor: "#4b5563",
                                     color: "white",
-                                    fontWeight: 700,
+                                    fontWeight: 600,
                                     fontSize: 15,
                                     height: 36,
                                     borderRadius: 3,
@@ -215,9 +223,9 @@ export default function DataVerseSection() {
                         <Chip
                             label="Use arrow to see more alerts and reminders"
                             sx={{
-                                bgcolor: "#6b7280",
+                                bgcolor: "#4b5563",
                                 color: "white",
-                                fontWeight: 700,
+                                fontWeight: 600,
                                 fontSize: 15,
                                 height: 36,
                                 borderRadius: 3,
@@ -230,11 +238,11 @@ export default function DataVerseSection() {
                                 variant="contained"
                                 sx={{
                                     background: "linear-gradient(180deg, #2a6aff, #1b56f0)",
-                                    fontSize: 18,
+                                    fontSize: 17,
                                     fontWeight: 600,
                                     borderRadius: 9999,
-                                    minWidth: 190,
-                                    px: 8,
+                                    minWidth: 180,
+                                    px: 6,
                                     py: 1.5,
                                     textTransform: "none",
                                     boxShadow: "0 10px 30px rgba(0,123,255,.35)",
@@ -250,11 +258,11 @@ export default function DataVerseSection() {
                                 sx={{
                                     borderColor: "rgba(255,255,255,0.5)",
                                     color: "white",
-                                    fontSize: 18,
+                                    fontSize: 17,
                                     fontWeight: 600,
                                     borderRadius: 9999,
                                     minWidth: 140,
-                                    px: 8,
+                                    px: 6,
                                     py: 1.5,
                                     textTransform: "none",
                                     "&:hover": {
@@ -268,7 +276,7 @@ export default function DataVerseSection() {
                         </Stack>
                     </Box>
 
-                    {/* RIGHT: overlapped cards, constrained inside */}
+                    {/* RIGHT: Stacked cards */}
                     <Box sx={{ position: "relative", height: 420 }}>
                         <AlertsBox
                             title="Critical alerts"
@@ -281,7 +289,7 @@ export default function DataVerseSection() {
                                 position: "absolute",
                                 top: 0,
                                 right: 110,
-                                borderRadius: 10,
+                                borderRadius: 6,
                                 zIndex: 1,
                             }}
                         />
@@ -295,8 +303,8 @@ export default function DataVerseSection() {
                             sx={{
                                 position: "absolute",
                                 top: 160,
-                                right: -8, // slight inset while still inside the container
-                                borderRadius: 10,
+                                right: -8,
+                                borderRadius: 6,
                                 zIndex: 2,
                             }}
                         />

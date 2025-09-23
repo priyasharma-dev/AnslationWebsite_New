@@ -1,20 +1,20 @@
 .timeline-container {
-  position: relative;
-  /* background: radial-gradient(circle at center, #0a1630, #000814); */
+   position: relative;
   padding: 60px 40px;
   border-radius: 40px;
   color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -50px;
   
 }
 
 .timeline-title {
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 40px;
+  margin-top: -30px;
+  font-weight: 700;
   z-index: 2;
 }
 .timeline-subtitle {
@@ -28,7 +28,7 @@
 
 .timeline-svg {
   position: absolute;
-  top: 180px;
+  top: 170px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -39,8 +39,8 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 30px; /* space between rows */
-  margin-top: 105px;
+  gap: 35px; /* space between top and bottom row */
+  margin-top: 125px;
 }
 
 .row {
@@ -49,24 +49,29 @@
 }
 
 .top-row {
-  justify-content: flex-start; /* align left */
-  margin-top: -40px; /* tuck into top curve */
+  justify-content: flex-start;
+  margin-left: 20px; /* push inside curve */
 }
 
 .bottom-row {
-  justify-content: center; /* keep bottom centered */
-  margin-bottom: 20px;
+ justify-content: flex-end;
+  margin-right: 20px; 
 }
 
-
 .product-card {
-  width: 130px;
+  width: 150px;
+  height: 170px;
   background: rgba(255, 255, 255, 0.07);
   border-radius: 16px;
-  padding: 10px;
+  padding: 12px;
   text-align: center;
   color: #fff;
   transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .product-card:hover {
@@ -80,11 +85,11 @@
   margin-bottom: 1px;
 }
 
-/* Slight adjustment for positioning */
 .top-row {
-  margin-top: -40px; /* tuck into top curve */
+  margin-top: -40px; 
 }
 
 .bottom-row {
-  margin-bottom: 20px; /* sits nicely above bottom curve */
+  margin-bottom: 20px; 
 }
+

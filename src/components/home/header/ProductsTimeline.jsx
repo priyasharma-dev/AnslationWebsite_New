@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react"; // added useState
 import "./ProductsTimeline.css";
+import AdsAstraTimeline from "../AdsAstraTimeline";
 
 const products = new Array(11).fill({
   title: "Ads-astra",
@@ -7,11 +8,20 @@ const products = new Array(11).fill({
 });
 
 const ProductsTimeline = () => {
+  const [showAdsstraTimeline, setShowAdsstraTimeline] = useState(false); // new state
+
+  const handleCardClick = () => {
+    setShowAdsstraTimeline(true);
+  };
+
+  const handleClose = () => {
+    setShowAdsstraTimeline(false);
+  };
+
   return (
     <div className="products-timeline-container">
       <h2 className="products-timeline-title">Products</h2>
 
-      {/* Curved Timeline SVG */}
       <svg
         className="products-timeline-svg"
         width="1307"
@@ -27,13 +37,22 @@ const ProductsTimeline = () => {
         />
       </svg>
 
-      {/* Cards */}
       <div className="products-timeline-cards">
         <div className="products-row products-top-row">
           {products.slice(0, 4).map((p, i) => (
-            <div key={i} className="products-card">
-              <div className="icon">📊</div>
-              <h4>{p.title}</h4>
+            <div
+              key={i}
+              className="products-card"
+              onClick={handleCardClick}
+              style={{ cursor: "pointer" }}
+            >
+              <div className="icon w-10 h-10">
+                <img
+                  src="/image.png"
+                  alt="Bar Chart Icon"
+                  className="w-full h-full object-contain"
+                />
+              </div>              <h4>{p.title}</h4>
               <p>{p.desc}</p>
             </div>
           ))}
@@ -42,13 +61,25 @@ const ProductsTimeline = () => {
         <div className="products-row products-bottom-row">
           {products.slice(4, 11).map((p, i) => (
             <div key={i} className="products-card">
-              <div className="icon">📊</div>
-              <h4>{p.title}</h4>
+              <div className="icon w-10 h-10">
+                <img
+                  src="/image.png"
+                  alt="Bar Chart Icon"
+                  className="w-full h-full object-contain"
+                />
+              </div>              <h4>{p.title}</h4>
               <p>{p.desc}</p>
             </div>
           ))}
         </div>
       </div>
+
+      {showAdsstraTimeline && (
+        <div className={`adsstra-timeline-container ${showAdsstraTimeline ? "fade-in" : ""}`} style={{ marginTop: "75px" }}>
+          <AdsAstraTimeline />
+        </div>
+      )}
+
     </div>
   );
 };
