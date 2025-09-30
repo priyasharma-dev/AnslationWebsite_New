@@ -4,7 +4,7 @@ import Header from "../components/home/header/Header";
 import Hero from "../components/home/hero/Hero";
 import Svg from "../components/home/exploresvg/Svg";
 import Always from "../components/home/stayupdate/Always";
-import { Ellipse81 } from "../gradient/gradienttop";
+import { Ellipse81, Ellipse82, Rectangle82, Rectangle83 } from "../gradient/gradienttop";
 import Footer from "../components/home/footer/Footer";
 
 function Home() {
@@ -23,6 +23,15 @@ function Home() {
     >
       {/* Background gradient */}
       <Ellipse81 />
+<<<<<<< HEAD
+=======
+       <Rectangle82 />
+       <Rectangle83 />
+      <Ellipse82/>
+      
+
+      {/* Content */}
+>>>>>>> 825bdd9 (WIP: local changes)
       <Header />
       <Hero />
       <Svg />
