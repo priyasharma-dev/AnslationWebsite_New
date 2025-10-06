@@ -9,35 +9,69 @@ import img6 from '../../assets/our-team1.png'
 function OurTeam() {
   return (
     <>
-    <div className='mt-50 container  max-w-7xl mx-auto ' style={{
+    <div className='mt-12 container max-w-7xl mx-auto px-4 py-12' style={{
            
            background:
              "radial-gradient(50% 50% at 50% 50%, #004DFF 0%, rgba(0, 81, 255, 0.48) 49.04%, rgba(0, 111, 255, 0) 100%)",
           }}  >
-        <div className='' >
-            <h2 className='text-center text-4xl font-bold' >Our Team</h2>
-            <p className='mx-auto w-md text-justify my-4 '>Our leadership team brings a wealth of experience, innovation, and passion to Anslation. Together, they lead us in transforming technology to drive business success</p>
+        <div className='text-center' >
+            <h2 className=' text-4xl font-bold' >Our Team</h2>
+            <p className='mx-auto w-full md:w-2/3 text-justify my-4 text-white '>Our leadership team brings a wealth of experience, innovation, and passion to Anslation. Together, they lead us in transforming technology to drive business success</p>
         </div>
-        <div className='flex justify-between  mt-20' >
-            <div>
-                <img src={img1} alt="" srcset="" className='h-80  ' />
+
+        {/* Mobile / Small screens: 2 per row, a little smaller */}
+        <div className="grid grid-cols-3 gap-2 mt-10 md:hidden">
+          {[img1, img2, img3, img4, img5, img6].map((src, i) => (
+            <div key={i} className="w-full">
+              <img
+                src={src}
+                alt={`team-${i + 1}`}
+                className="w-full h-36 object-contain"
+              />
             </div>
-            <div className='py-20' >
-            <img src={img2} alt="" srcset="" className='h-80' />
-            </div>
-            <div>
-            <img src={img3} alt="" srcset="" className='h-80' />
-            </div>
-            <div className='py-20' >
-            <img src={img4} alt="" srcset="" className='h-80' />
-            </div>
-            <div>
-            <img src={img5} alt="" srcset="" className='h-80' />
-            </div>
-            <div className='py-20' >
-            <img src={img6} alt="" srcset="" className='h-80' />
-            </div>
+          ))}
         </div>
+ <div className="hidden md:flex md:flex-wrap md:justify-center md:gap-6 md:mt-20">
+          <div className="w-1/3 sm:w-auto mt-0">
+            <img src={img1} alt="team-1" className="h-80 w-full object-contain" />
+          </div>
+          <div className="w-1/3 sm:w-auto mt-10 md:mt-20">
+            <img src={img2} alt="team-2" className="h-80 w-full object-contain" />
+          </div>
+          <div className="w-1/3 sm:w-auto mt-0">
+            <img src={img3} alt="team-3" className="h-80 w-full object-contain" />
+          </div>
+          <div className="w-1/3 sm:w-auto mt-10 md:mt-20">
+            <img src={img4} alt="team-4" className="h-80 w-full object-contain" />
+          </div>
+          <div className="w-1/3 sm:w-auto mt-0">
+            <img src={img5} alt="team-5" className="h-80 w-full object-contain" />
+          </div>
+          <div className="w-1/3 sm:w-auto mt-10 md:mt-20">
+            <img src={img6} alt="team-6" className="h-80 w-full object-contain" />
+          </div> 
+        </div>
+
+        {/* <div className='flex flex-wrap justify-center gap-6  mt-20' >
+            <div className='w-1/3 sm:w-auto mt-0'>
+                <img src={img1} alt="" srcset="" className='h-40 sm:h-80 w-full   ' />
+            </div>
+            <div className=' w-1/3 sm:w-auto mt-10 md:mt-20' >
+            <img src={img2} alt="" srcset="" className='h-40 sm:h-80 w-full ' />
+            </div >
+            <div className='w-1/3 sm:w-auto mt-0'>
+            <img src={img3} alt="" srcset="" className='h-40 sm:h-80 w-full ' />
+            </div>
+            <div className=' w-1/3 sm:w-auto mt-10 md:mt-20' >
+            <img src={img4} alt="" srcset="" className='h-40 sm:h-80 w-full ' />
+            </div>
+            <div className='w-1/3 sm:w-auto mt-0'>
+            <img src={img5} alt="" srcset="" className='h-40 sm:h-80 w-full ' />
+            </div>
+            <div className=' w-1/3 sm:w-auto mt-10 md:mt-20' >
+            <img src={img6} alt="" srcset="" className='h-40 sm:h-80 w-full ' />
+            </div>
+        </div> */}
     </div>
     </>
   )
