@@ -18,7 +18,7 @@ function Home() {
         background: "black",
         position: "relative", 
         overflow: "hidden",
-        width:"90%"
+        width:"100%"
       }}
     >
       {/* Background gradient */}
