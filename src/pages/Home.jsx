@@ -13,27 +13,12 @@ function Home() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        color: "white",
-        fontFamily: "sans-serif",
-        background: "black",
         position: "relative", 
         overflow: "hidden",
-        width:"90%"
       }}
     >
-      {/* Background gradient */}
-      <Ellipse81 />
-       <Rectangle82 />
-       <Rectangle83 />
-      <Ellipse82/>
-      
-
-      {/* Content */}
-      <Header />
       <Hero />
       <Svg />
-      <Always />
-      <Footer />
     </Box>
   );
 }

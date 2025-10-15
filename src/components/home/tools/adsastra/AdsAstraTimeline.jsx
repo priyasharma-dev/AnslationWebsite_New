@@ -9,13 +9,16 @@ const products = new Array(11).fill({
 
 const AdsAstraTimeline = () => {
   const [showDataVerseTimeline, setShowDataVerseTimeline] = useState(false);
+  const [clickedIndex, setClickedIndex] = useState(null);
 
-  const handleCardClick = () => {
+  const handleCardClick = (index) => {
+    setClickedIndex(index);
     setShowDataVerseTimeline(true);
   };
 
   const handleClose = () => {
     setShowDataVerseTimeline(false);
+    setClickedIndex(null);
   };
 
   return (
@@ -47,27 +50,9 @@ const AdsAstraTimeline = () => {
         {/* Top row: 4 cards */}
         <div className="row top-row">
           {products.slice(0, 4).map((p, i) => (
-            <div key={i} className="product-card"               onClick={handleCardClick}
->
-              <div className="icon w-10 h-10">
-                <img
-                  src="/image.png"
-                  alt="Bar Chart Icon"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <h4>{p.title}</h4>
-              <p>{p.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom row: 7 cards */}
-        <div className="row bottom-row">
-          {products.slice(4, 11).map((p, i) => (
-            <div
-              key={i}
-              className="product-card"
+            <div key={i} 
+            className={`product-card ${clickedIndex === i ? "active" : ""}`}
+            onClick={() => handleCardClick(i)}
             >
               <div className="icon w-10 h-10">
                 <img
@@ -78,6 +63,35 @@ const AdsAstraTimeline = () => {
               </div>
               <h4>{p.title}</h4>
               <p>{p.desc}</p>
+              {clickedIndex === i && (
+                <div className="line-connector top-row"></div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom row: 7 cards */}
+        <div className="row bottom-row">
+          {products.slice(4, 11).map((p, i) => (
+            <div
+              key={i}
+              className={`products-card ${
+                clickedIndex === i + 4 ? "active" : ""
+              }`}
+              onClick={() => handleCardClick(i + 4)}
+            >
+              <div className="icon w-10 h-10">
+                <img
+                  src="/image.png"
+                  alt="Bar Chart Icon"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h4>{p.title}</h4>
+              <p>{p.desc}</p>
+              {clickedIndex === i + 4 && (
+                <div className="line-connector bottom-row"  ></div>
+              )}
             </div>
           ))}
         </div>
@@ -86,12 +100,11 @@ const AdsAstraTimeline = () => {
       {/* Show DataVerse timeline when clicked */}
       {showDataVerseTimeline && (
         <div
-          className={`data-verse-timeline-container ${
-            showDataVerseTimeline ? "fade-in" : ""
-          }`}
+          className={`data-verse-timeline-container ${showDataVerseTimeline ? "fade-in" : ""
+            }`}
           style={{ marginTop: "75px" }}
         >
-          <DataVerseSection  />
+          <DataVerseSection />
         </div>
       )}
     </div>

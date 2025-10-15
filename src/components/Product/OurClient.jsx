@@ -2,28 +2,29 @@ import React from 'react'
 import line1 from "../../assets/Line 1.png"
 import line2 from "../../assets/Line 3.png"
 import avtar from "../../assets/Avatar@3x 1 2.png"
+import { Ellipse81 , Ellipse82 } from '../../gradient/gradienttop'
+
+import { Rectangle82, Rectangle83
+ } from '../../gradient/gradienttop'
 
 function OurClient() {
   return (
-    <div className='container mx-auto my-20  '> 
+    <div className='container mx-auto w-full  my-20 relative '> 
+    <div className='' >
       <div className='' >
-        <h2 className='text-center text-5xl font-extrabold ' >Our clients</h2>
+        <h2 className='text-center text-5xl font-extrabold z-30  ' >Our clients</h2>
         <div className='w-96 my-10  mx-auto ' >
-        <p className='text-xl text-center' >Hear firsthand how our solutions have boosted online success for users like you.</p>
+        <p className='text-xl text-center'  >Hear firsthand how our solutions have boosted online success for users like you.</p>
         </div>
       </div>
-      <div className='relative' >
-      <div className=' mx-auto w-2xl h-96 my-10 flex justify-center items-center gap-10  ' style={{
-           
-           background:
-             "radial-gradient(50% 50% at 50% 50%, #1D73F3 , #02010300)",
-          }}  >
-        
-              <div>
-                  <img src={avtar} alt="avtar" className='w-36' />
+      <div className='relative  overflow-hidden ' >
+      <div className=' mx-auto  w-full h-[400px]  my-10 flex justify-center items-center gap-10  '>
+            <div className='w-full   z-10 left-0 h-[500px] rounded-full absolute bg-[radial-gradient(50%_50%_at_50%_50%,_#0036CA_0%,_#003E87A6_49.04%,_#000000_120%)] '></div>
+              <div className='z-50 mb-25' >
+                  <img src={avtar} alt="avtar" className='w-36 z-50' />
               </div>
 
-                <div className=' w-72' >
+                <div className=' w-72 z-50 mb-25' >
                    <div className='py-2' >”This product has completely transformed how I manage my projects and deadlines”</div>
                     <p>Talia Taylor</p>
                     <div className='text-white/70' >Digital Marketing Director @ Quantum</div>
@@ -38,6 +39,7 @@ function OurClient() {
       </div>
       </div>
 
+    </div>
     </div>
   )
 }

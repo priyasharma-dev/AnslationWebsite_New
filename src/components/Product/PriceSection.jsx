@@ -1,48 +1,16 @@
 import React, { useState } from 'react';
 import { Check } from 'lucide-react';
 
-export default function PricingComponent() {
-  const [isToggled, setIsToggled] = useState(false);
+const PLANS = [
+  { id: 1, name: 'Pricing',  price: 29,  features: ['Keyword optimization','Automated meta tags','SEO monitoring','Monthly reports'] },
+  { id: 2, name: 'Pro',      price: 79,  features: ['Keyword optimization','Automated meta tags','SEO monitoring','Monthly reports','Content suggestions','Link optimization'] },
+  { id: 3, name: 'Business', price: 149, features: ['Keyword optimization','Automated meta tags','SEO monitoring','Monthly reports','Content suggestions','Link optimization','Multi-user access','API integration'] },
+];
 
-  const plans = [
-    {
-      name: 'Pricing',
-      price: 29,
-      features: [
-        'Keyword optimization',
-        'Automated meta tags',
-        'SEO monitoring',
-        'Monthly reports'
-      ]
-    },
-    {
-      name: 'Pro',
-      price: 79,
-      features: [
-        'Keyword optimization',
-        'Automated meta tags',
-        'SEO monitoring',
-        'Monthly reports',
-        'Content suggestions',
-        'Link optimization'
-      ],
-      highlighted: true
-    },
-    {
-      name: 'Business',
-      price: 149,
-      features: [
-        'Keyword optimization',
-        'Automated meta tags',
-        'SEO monitoring',
-        'Monthly reports',
-        'Content suggestions',
-        'Link optimization',
-        'Multi-user access',
-        'API integration'
-      ]
-    }
-  ];
+export default function PricingComponent() {
+  const DEFAULT_ID = 2; // auto-selected on load (Pro)
+  const [isToggled, setIsToggled] = useState(true);
+  const [selectedId, setSelectedId] = useState(DEFAULT_ID);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#020817] via-[#0a1628] to-[#020817] flex items-center justify-center p-8">
@@ -53,8 +21,8 @@ export default function PricingComponent() {
           <p className="text-gray-400 text-lg">
             Choose the right plan to meet your SEO<br />needs and start optimizing today.
           </p>
-          
-          {/* Toggle */}
+
+          {/* Toggle (unchanged) */}
           <div className="flex items-center justify-center gap-3 mt-8">
             <button
               onClick={() => setIsToggled(!isToggled)}
@@ -68,59 +36,60 @@ export default function PricingComponent() {
                 }`}
               />
             </button>
-            <span className="text-gray-400">dsad</span>
+            <span className="text-gray-400">toggle</span>
           </div>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 relative  md:grid-cols-3 gap-6">
-          {plans.map((plan, index) => (
-            <div
-              key={index}
-              className={`rounded-2xl p-8 backdrop-blur-sm transition-all ${
-                plan.highlighted
-                  ? 'bg-blue-900/20 border-2 border-blue-500/50 shadow-xl shadow-blue-500/20 scale-105'
-                  : 'bg-black/40 border border-gray-800'
-              }`}
-            >
-              {/* Plan Header */}
-              <div className="mb-8">
-                <h3 className="text-2xl font-semibold text-white mb-2">
-                  {plan.name}
-                </h3>
-                <div className="flex items-baseline">
-                  <span className="text-4xl font-bold text-white">
-                    ${plan.price}
-                  </span>
-                  <span className="text-gray-400 ml-1">/mo</span>
-                </div>
-              </div>
-
-              {/* Features List */}
-              <div className="space-y-4 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-300 text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* CTA Button */}
-              <div className='' >
-              <button
-                className={`w-full py-3 px-6 rounded-lg font-medium   transition-all ${
-                  plan.highlighted
-                    ? 'bg-blue-600 hover:bg-blue-700   text-white shadow-lg shadow-blue-500/30'
-                    : 'bg-gray-800 hover:bg-gray-700 text-gray-300'
-                }`}
+        {/* Pricing Cards (hover selects; leaving the grid resets to default) */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          onMouseLeave={() => setSelectedId(DEFAULT_ID)}
+        >
+          {PLANS.map((plan) => {
+            const highlighted = plan.id === selectedId;
+            return (
+              <div
+                key={plan.id}
+                className={`rounded-2xl p-8 backdrop-blur-sm transition-all cursor-pointer
+                  ${highlighted
+                    ? 'bg-blue-900/20 border-2 border-blue-500/50 shadow-xl shadow-blue-500/20 scale-105'
+                    : 'bg-black/40 border border-gray-800 hover:scale-[1.02]'}
+                `}
+                onMouseEnter={() => setSelectedId(plan.id)}
+               
               >
-                Join waitlist
-              </button>
+                {/* Plan Header */}
+                <div className="mb-8">
+                  <h3 className="text-2xl font-semibold text-white mb-2">{plan.name}</h3>
+                  <div className="flex items-baseline">
+                    <span className="text-xl  text-gray-400">${plan.price}</span>
+                    <span className="text-gray-400 ml-1">/mo</span>
+                  </div>
+                </div>
+
+                {/* Features */}
+                <div className="space-y-4 mb-8">
+                  {plan.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-300 text-sm">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <button
+                  className={`w-full py-3 px-6 rounded-lg font-medium transition-all
+                    ${highlighted
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/30'
+                      : 'bg-gray-800 hover:bg-gray-700 text-gray-300'}
+                  `}
+                >
+                  Join waitlist
+                </button>
               </div>
-           
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import {
     IconButton,
     Button,
     Box,
+    Link
 } from "@mui/material";
 import { DarkMode, ArrowDropDown } from "@mui/icons-material";
 
@@ -17,7 +18,6 @@ export default function Header() {
                 background: "transparent",
                 boxShadow: "none",
                 zIndex: 10,
-                // width:"100%",
                 px: 2,
                 py: 4,
             }}
@@ -25,12 +25,15 @@ export default function Header() {
             <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
                 {/* Logo */}
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Link href="/" >
                     <img
                         src="./logo/logo.png"
                         alt="logo"
                         width="150"
                         height="65"
                     />
+                    </Link>
+                   
                 </Box>
 
                 {/* Nav Links */}

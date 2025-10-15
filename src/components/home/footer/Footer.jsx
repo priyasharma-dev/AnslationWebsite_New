@@ -11,6 +11,11 @@ import {
 } from "@mui/material";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
 import { Link as RouterLink } from "react-router-dom";
+import instagram from "../../../assets/Instagram 2.png"
+import linked from "../../../assets/LinkedIn 2.png"
+import Twitter from "../../../assets/Twitter.png"
+import youtube from "../../../assets/Youtube.png"
+import fac from '../../../assets/Facebook 2.png'
 
 
 export default function Footer() {
@@ -19,26 +24,36 @@ export default function Footer() {
       sx={{
         width: "100%",
         bgcolor: "transparent",
-        // background: "linear-gradient(to bottom, #0a0a0f, #00103a)",
+        background: "linear-gradient(to bottom, #0a0a0f, #00103a)",
         color: "white",
-        py: 8,
         mt: "auto",
         fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
       }}
     >
-      <Container maxWidth="xl">
+        <Divider sx={{ borderColor: "rgba(255,255,255)", }} />
+      <Container maxWidth="xl" sx={{ py: 6 }}     >
         {/* IMPORTANT: remove space-between so the right side isn't forced to the edge */}
-        <Grid container spacing={5} alignItems="flex-start">
+        <Grid container spacing={40} alignItems="flex-start" className="px-4 "   >
           {/* LEFT SIDE - Brand */}
           <Grid item xs={12} md={5}>
-            <Typography fontSize={32} fontWeight={500} mb={2}>
-              Anslatíon
-            </Typography>
-            <Typography fontSize={18} mb={3} lineHeight={1.6}>
-              Driven by Questions.
-              <br />
-              Delivered as Solutions
-            </Typography>
+            <div  >
+              <Typography fontSize={32} fontWeight={500} mb={2}>
+                Anslatíon
+              </Typography>
+              <Typography fontSize={18} mb={3} lineHeight={1.6}>
+                Driven by Questions.
+                <br />
+                Delivered as Solutions
+              </Typography>
+              <div className="flex justify-between mb-5 gap-2">
+                <img src={fac} alt="fac" className="w-5 h-5" />
+                <img src={instagram} alt="instgram" className="w-5 h-5" />
+                <img src={linked} alt="linked" className="w-5 h-5" />
+                <img src={Twitter} alt="twitter" className="w-5 h-5" />
+                <img src={youtube} alt="youtube" className="w-5 h-5" />
+              </div>
+            </div>
+
 
             <Stack direction="row" spacing={2}>
               <IconButton aria-label="Facebook" href="#" sx={{ color: "white" }}>
@@ -61,8 +76,8 @@ export default function Footer() {
 
           {/* RIGHT SIDE - 4 columns */}
           {/* Small left shift with negative margin if you want it a bit closer */}
-          <Grid item xs={12} md={7} sx={{ ml: { md: 29 } }}>
-            <Grid container spacing={18}>
+          <Grid item xs={12} md={7} >
+            <Grid container spacing={10}>
               {/* Product */}
               <Grid item xs={6} sm={3}>
                 <Typography fontSize={22} fontWeight={700} mb={3}>
@@ -97,14 +112,14 @@ export default function Footer() {
                 </Typography>
                 <Stack spacing={1}>
                   <Link
-                    component={RouterLink}
-                    to="/about"
+                    href="/about"
                     color="inherit"
                     fontSize={18}
                     underline="hover"
                   >
                     About
-                  </Link>                  <Link href="#" color="inherit" fontSize={18} underline="hover">Contact us</Link>
+                  </Link>                 
+                   <Link href="#" color="inherit" fontSize={18} underline="hover">Contact us</Link>
                   <Link href="/career" color="inherit" fontSize={18} underline="hover">Careers</Link>
                   <Link href="#" color="inherit" fontSize={18} underline="hover">Culture</Link>
                   <Link href="#" color="inherit" fontSize={18} underline="hover">Blog</Link>

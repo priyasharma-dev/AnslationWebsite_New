@@ -18,26 +18,110 @@ function OurTeam() {
             <h2 className='text-center text-4xl font-bold' >Our Team</h2>
             <p className='mx-auto w-md text-justify my-4 '>Our leadership team brings a wealth of experience, innovation, and passion to Anslation. Together, they lead us in transforming technology to drive business success</p>
         </div>
-        <div className='flex justify-between  mt-20' >
-            <div>
-                <img src={img1} alt="" srcset="" className='h-80  ' />
+                 <div className='flex justify-between mt-20'>
+          {/* 1 */}
+          <div className='group relative cursor-pointer'>
+            <img src={img1} alt='' className='h-80 object-cover rounded-xl' />
+            {/* overlay (uses your existing text block, just styled/positioned) */}
+            <div className='pointer-events-none absolute inset-0  rounded-xl 
+                            bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                            opacity-0 translate-y-2 transition-all duration-300 ease-out
+                            group-hover:opacity-100 group-hover:translate-y-0  '/>
+            <div className='absolute inset-0 flex items-end p-3
+                            opacity-0 translate-y-3 transition-all duration-300 ease-out delay-75
+                            group-hover:opacity-100 group-hover:translate-y-0'>
+              <div className='text-white '>
+                <p className='text-xs uppercase tracking-wide text-white/80'>CEO</p>
+                <p className='text-lg font-semibold'>sahil Khan</p>
+              </div>
             </div>
-            <div className='py-20' >
-            <img src={img2} alt="" srcset="" className='h-80' />
+          </div>
+
+          {/* 2 */}
+          <div className='py-20 group relative cursor-pointer'>
+            <img src={img2} alt='' className='h-80 object-cover rounded-xl' />
+            <div className='pointer-events-none absolute inset-0 rounded-xl
+                            bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                            opacity-0 translate-y-2 transition-all duration-300 ease-out
+                            group-hover:opacity-100 group-hover:translate-y-0' />
+            <div className='absolute inset-0 flex items-end p-3
+                            opacity-0 translate-y-3 transition-all duration-300 ease-out delay-75
+                            group-hover:opacity-100 group-hover:translate-y-0'>
+              <div className='text-white'>
+                <p className='text-xs uppercase tracking-wide text-white/80'>CTO</p>
+                <p className='text-lg font-semibold'>Aisha Khan</p>
+              </div>
             </div>
-            <div>
-            <img src={img3} alt="" srcset="" className='h-80' />
+          </div>
+
+          {/* 3 */}
+          <div className='group relative cursor-pointer'>
+            <img src={img3} alt='' className='h-80 object-cover rounded-xl' />
+            <div className='pointer-events-none absolute inset-0 rounded-xl
+                            bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                            opacity-0 translate-y-2 transition-all duration-300 ease-out
+                            group-hover:opacity-100 group-hover:translate-y-0' />
+            <div className='absolute inset-0 flex items-end p-3
+                            opacity-0 translate-y-3 transition-all duration-300 ease-out delay-75
+                            group-hover:opacity-100 group-hover:translate-y-0'>
+              <div className='text-white'>
+                <p className='text-xs uppercase tracking-wide text-white/80'>Marketing Head</p>
+                <p className='text-lg font-semibold'>Vikram Singh</p>
+              </div>
             </div>
-            <div className='py-20' >
-            <img src={img4} alt="" srcset="" className='h-80' />
+          </div>
+
+          {/* 4 */}
+          <div className='py-20 group relative cursor-pointer'>
+            <img src={img4} alt='' className='h-80 object-cover rounded-xl' />
+            <div className='pointer-events-none absolute inset-0 rounded-xl
+                            bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                            opacity-0 translate-y-2 transition-all duration-300 ease-out
+                            group-hover:opacity-100 group-hover:translate-y-0' />
+            <div className='absolute inset-0 flex items-end p-3
+                            opacity-0 translate-y-3 transition-all duration-300 ease-out delay-75
+                            group-hover:opacity-100 group-hover:translate-y-0'>
+              <div className='text-white'>
+                <p className='text-xs uppercase tracking-wide text-white/80'>Product Lead</p>
+                <p className='text-lg font-semibold'>Priya</p>
+              </div>
             </div>
-            <div>
-            <img src={img5} alt="" srcset="" className='h-80' />
+          </div>
+
+          {/* 5 */}
+          <div className='group relative cursor-pointer'>
+            <img src={img5} alt='' className='h-80 object-cover rounded-xl' />
+            <div className='pointer-events-none absolute inset-0 rounded-xl
+                            bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                            opacity-0 translate-y-2 transition-all duration-300 ease-out
+                            group-hover:opacity-100 group-hover:translate-y-0' />
+            <div className='absolute inset-0 flex items-end p-3
+                            opacity-0 translate-y-3 transition-all duration-300 ease-out delay-75
+                            group-hover:opacity-100 group-hover:translate-y-0'>
+              <div className='text-white'>
+                <p className='text-xs uppercase tracking-wide text-white/80'>Design Lead</p>
+                <p className='text-lg font-semibold'>Rohit Verma</p>
+              </div>
             </div>
-            <div className='py-20' >
-            <img src={img6} alt="" srcset="" className='h-80' />
+          </div>
+
+          {/* 6 */}
+          <div className='py-20 group relative cursor-pointer'>
+            <img src={img6} alt='' className='h-80 object-cover rounded-xl' />
+            <div className='pointer-events-none absolute inset-0 rounded-xl
+                            bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                            opacity-0 translate-y-2 transition-all duration-300 ease-out
+                            group-hover:opacity-100 group-hover:translate-y-0' />
+            <div className='absolute inset-0 flex items-end p-3
+                            opacity-0 translate-y-3 transition-all duration-300 ease-out delay-75
+                            group-hover:opacity-100 group-hover:translate-y-0'>
+              <div className='text-white'>
+                <p className='text-xs uppercase tracking-wide text-white/80'>Engineering Manager</p>
+                <p className='text-lg font-semibold'>Neha Gupta</p>
+              </div>
             </div>
-        </div>
+          </div>
+          </div>
     </div>
     </>
   )

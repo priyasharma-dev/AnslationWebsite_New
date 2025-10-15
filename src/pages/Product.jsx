@@ -14,8 +14,15 @@ function Product() {
     <div>
         <ProductHeader/>
         <SiteOverview/>
-        <Team/>
-        <PowerAi/>
+        <div style={{ position: "relative",
+        background:
+          "radial-gradient(50% 50% at 50% 50%, #004DFF 0%, rgba(0, 81, 255, 0.48) 49.04%, rgba(0, 111, 255, 0) 100%)",
+        opacity: 0.5,}}
+         >
+            <Team/>
+            <PowerAi/>
+        </div>
+         
         <Elevate/>
         <OurClient/>
         <PricingSection/>

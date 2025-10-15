@@ -31,7 +31,7 @@ function CareerGrowth() {
                     <p className='w-2xl text-white/75' >Powered by a vibrant creative and cultural scene, the thriving city of Hobart sits nestled amongst the pristine wilderness of Tasmania. Procreate proves you can develop industry-leading creative software anywhere with the right people and drive. </p>
                 </div>
             </div>
-        </div>
+        </div> 
     )
 }
 

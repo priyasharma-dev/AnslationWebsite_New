@@ -1,4 +1,5 @@
-import React, { useState } from "react"; // added useState
+
+import React, { useState } from "react";
 import "./ProductsTimeline.css";
 import AdsAstraTimeline from "../tools/adsastra/AdsAstraTimeline";
 
@@ -8,20 +9,22 @@ const products = new Array(11).fill({
 });
 
 const ProductsTimeline = () => {
-  const [showAdsstraTimeline, setShowAdsstraTimeline] = useState(false); // new state
+  const [showAdsstraTimeline, setShowAdsstraTimeline] = useState(false);
+  const [clickedIndex, setClickedIndex] = useState(null);
 
-  const handleCardClick = () => {
+  const handleCardClick = (index) => {
+    setClickedIndex(index);
     setShowAdsstraTimeline(true);
   };
 
   const handleClose = () => {
     setShowAdsstraTimeline(false);
+    setClickedIndex(null);
   };
 
   return (
     <div className="products-timeline-container">
       <h2 className="products-timeline-title">Products</h2>
-
       <svg
         className="products-timeline-svg"
         width="1307"
@@ -36,15 +39,13 @@ const ProductsTimeline = () => {
           strokeWidth="2"
         />
       </svg>
-
       <div className="products-timeline-cards">
         <div className="products-row products-top-row">
           {products.slice(0, 4).map((p, i) => (
             <div
               key={i}
-              className="products-card"
-              onClick={handleCardClick}
-              style={{ cursor: "pointer" }}
+              className={`products-card ${clickedIndex === i ? "active" : ""}`}
+              onClick={() => handleCardClick(i)}
             >
               <div className="icon w-10 h-10">
                 <img
@@ -52,34 +53,61 @@ const ProductsTimeline = () => {
                   alt="Bar Chart Icon"
                   className="w-full h-full object-contain"
                 />
-              </div>              <h4>{p.title}</h4>
+              </div>
+              <h4>{p.title}</h4>
               <p>{p.desc}</p>
+              {clickedIndex === i && (
+                <div className="line-connector top-row"></div>
+              )}
             </div>
           ))}
         </div>
-
         <div className="products-row products-bottom-row">
           {products.slice(4, 11).map((p, i) => (
-            <div key={i} className="products-card">
+            <div
+              key={i}
+              className={`products-card ${
+                clickedIndex === i + 4 ? "active" : ""
+              }`}
+              onClick={() => handleCardClick(i + 4)}
+            >
               <div className="icon w-10 h-10">
                 <img
                   src="/image.png"
                   alt="Bar Chart Icon"
                   className="w-full h-full object-contain"
                 />
-              </div>              <h4>{p.title}</h4>
+              </div>
+              <h4>{p.title}</h4>
               <p>{p.desc}</p>
+              {clickedIndex === i + 4 && (
+                <div className="line-connector bottom-row"  ></div>
+              )}
             </div>
           ))}
         </div>
       </div>
-
       {showAdsstraTimeline && (
-        <div className={`adsstra-timeline-container ${showAdsstraTimeline ? "fade-in" : ""}`} style={{ marginTop: "75px" }}>
+        <div
+          className={`adsstra-timeline-container ${
+            showAdsstraTimeline ? "fade-in" : ""
+          }`}
+          style={{ marginTop: "75px" }}
+        >
+          <button
+            onClick={handleClose}
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              zIndex: "1000",
+            }}
+          >
+            Close
+          </button>
           <AdsAstraTimeline />
         </div>
       )}
-
     </div>
   );
 };

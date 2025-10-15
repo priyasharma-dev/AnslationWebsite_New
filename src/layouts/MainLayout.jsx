@@ -22,7 +22,7 @@ function MainLayout() {
             <Outlet/>
         </div>
         <div>
-            <Always/>
+        <Always/>
         <Footer/>
         </div>
         
