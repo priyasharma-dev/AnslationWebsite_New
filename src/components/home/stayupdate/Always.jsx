@@ -73,15 +73,39 @@ function Always() {
                 }}
             >
                 {/* Left Column */}
-                <Box sx={{ width: { xs: "100%", md: "50%" }, maxWidth: 600, color: "white" }}>
-                    <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                        <Box sx={{ borderTop: "1px solid white", width: 64, mr: 2 }} />
-                        <Typography sx={{ whiteSpace: "nowrap", fontSize: "20px" }}>
+                <Box sx={{ width: { xs: "100%", md: "55%" },
+                 maxWidth:{ xs: "100%", md: 600 } , 
+                 color: "white",
+                 textAlign: { xs: "center", md: "left" },
+                 display:"flex",
+                 flexDirection:"column",
+                 alignItems: { xs: "center", md: "flex-start" },
+                 }}>
+                    <Box sx={{ 
+                        display: "flex", 
+                        alignItems: "center", 
+                        justifyContent: { xs: "center", md: "flex-start" },
+                        mb:{ xs: 1.5, sm: 2 },
+                         gap: 2, 
+                         }}
+                         >
+
+                        <Box sx={{ borderTop: "1px solid white", width: { xs: 40, sm: 56, md: 64 } }} />
+                        <Typography sx={{ whiteSpace: "nowrap", fontSize: { xs: 14, sm: 16, md: 18 } }}>
                             STAY UPDATED
                         </Typography>
                     </Box>
 
-                    <Typography variant="h1" sx={{ fontSize: { xs: 48, md: 84 } }} gutterBottom>
+
+                    <Typography 
+                    variant="h1" 
+                    sx={{
+                         fontWeight: 900,
+                         lineHeight: { xs: 1.15, md: 1.1 },
+                         fontSize: { xs: 32, sm: 44, md: 64, lg: 84},
+                         letterSpacing: { xs: -0.2, sm: -0.4, md: -0.6 },
+                          }} 
+                          gutterBottom>
                         Be Always
                         <br />
                         In Touch
@@ -90,7 +114,14 @@ function Always() {
                         </Box>
                     </Typography>
 
-                    <Typography variant="body1" sx={{ mb: 5, fontSize: "1rem", opacity: 0.9 }}>
+                    <Typography
+                     variant="body1" 
+                     sx={{
+                         mb: { xs: 4, sm: 4, md: 5 },
+                          fontSize:  { xs: 14, sm: 15, md: 16 }, 
+                          opacity: 0.9,
+                           maxWidth: 520,
+                          textAlign: { xs: "center", md: "left" }, }}>
                         You may be interested in what we can offer you.
                     </Typography>
 
@@ -101,14 +132,15 @@ function Always() {
                         sx={{
                             display: "flex",
                             alignItems: "center",
-                            maxWidth: "100%",
-                            borderRadius: "12px",
+                            width: "100%",
+                             maxWidth: { xs: "100%", sm: 460,md: 560 },
+                            borderRadius: { xs: "12px", md: "14px" },
                             backgroundColor: "#2C2C2C",
                             border: "1px solid rgba(255,255,255,0.5)",
-                            px: 2,
-                            py: 1,
+                            px: { xs: 1.5, sm: 2, md: 2.25 },
+                            py:{ xs: 0.5, sm: 1, md:1.5 } ,
                             boxShadow: "6px 6px 15px rgba(0,0,0,0.5)",
-                            gap: 2,
+                            gap: { xs: 1, sm: 1.5, md: 2 },
                         }}
                         noValidate
                         autoComplete="off"
@@ -120,10 +152,12 @@ function Always() {
                             required
                             sx={{
                                 color: "white",
-                                fontSize: "1rem",
+                                fontSize: { xs: 15,sm: 15, md: 16 },
                                 "& .MuiInputBase-input": {
-                                    p: 1.5,
+                                    p: { xs: 1, md: 1.5, lg: 1.5 },
+                                    
                                     "::placeholder": { color: "rgba(255,255,255,0.7)" },
+                                     textAlign: { xs: "left", md: "left" },
                                 },
                             }}
                         />
@@ -134,11 +168,12 @@ function Always() {
                             sx={{
                                 color: "white",
                                 border: "1px solid rgba(255,255,255,0.5)",
-                                width: 40,
-                                height: 40,
+                                width: { xs: 44, sm: 48, md: 52 },
+                                height:{ xs: 44, sm: 48, md: 52 } ,
                                 borderRadius: "50%",
                                 backgroundColor: "transparent",
                                 p: 0,
+                                flexShrink: 0,
 
                             }}
                             aria-label="Submit email"
@@ -147,7 +182,9 @@ function Always() {
                                 component="img"
                                 src="/arrow.png" // make sure this file exists in your public/ folder
                                 alt="Submit"
-                                sx={{ width: 40, height: 40, display: "block" }}
+                                sx={{ width:{ xs: 20, sm: 22, md: 22 } ,
+                                     height: { xs: 20, sm: 22, md: 22 },
+                                      display: "block" }}
                             />
                         </IconButton>
                     </Box>
@@ -161,15 +198,15 @@ function Always() {
                         justifyContent: "center",
                         alignItems: "center",
                         position: "relative",
-                        minHeight: 300,
+                        minHeight: { xs: 200, sm: 250, md: 300 },
                     }}
                 >
                     {/* Blur background blob */}
                     <Box
                         sx={{
                             position: "absolute",
-                            width: 480,
-                            height: 480,
+                            width: { xs: 250, sm: 350, md: 480 },
+                            height: { xs: 250, sm: 350, md: 480 },
                             borderRadius: "50%",
 
                             zIndex: 0,
@@ -186,8 +223,9 @@ function Always() {
                         alt="Illustration"
                         sx={{
                             width: "100%",
-                            maxWidth: 750,
-                            height: 400,
+                            maxWidth: { xs: 280, sm: 400, md: 550 },
+                            maxHeight: { xs: 220, sm: 300, md: 410 },
+                            // height: 400,
                             position: "relative",
                             zIndex: 1,
                             display: "block",

@@ -15,6 +15,7 @@ function Home() {
         flexDirection: "column",
         position: "relative", 
         overflow: "hidden",
+        width:"100%"
       }}
     >
       <Hero />
