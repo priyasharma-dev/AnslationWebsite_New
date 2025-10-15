@@ -120,7 +120,7 @@ function CareerPage() {
                       <span className="text-sm text-gray-400 uppercase tracking-wide">
                         {job.department}
                       </span>
-                      <div className="flex items-center gap-2 text-gray-400">
+                      <div className="flex items-center gap-3 text-gray-400">
                         <span className="text-sm">{job.location}</span>
                       </div>
                     </div>
