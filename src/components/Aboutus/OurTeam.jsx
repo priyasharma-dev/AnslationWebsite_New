@@ -8,6 +8,16 @@ import img6 from '../../assets/our-team1.png'
 import { OurTeamGradiantBottom, OurTeamGradiantTop } from '../../gradient/gradiant'
 import { motion } from 'framer-motion'
 
+const team = [
+  { img: img1, role: "CEO", name: "sahil Khan" },
+  { img: img2, role: "CTO", name: "Aisha Khan" },
+  { img: img3, role: "Marketing Head", name: "Vikram Singh" },
+  { img: img4, role: "Product Lead", name: "Priya" },
+  { img: img5, role: "Design Lead", name: "Rohit Verma" },
+  { img: img6, role: "Engineering Manager", name: "Neha Gupta" },
+];
+
+
 function OurTeam() {
   return (
     <>
