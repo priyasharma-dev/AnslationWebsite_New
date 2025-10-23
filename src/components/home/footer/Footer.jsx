@@ -28,7 +28,7 @@ export default function Footer() {
         background: "linear-gradient(to bottom, #0a0a0f, #00103a)",
         color: "white",
        py: { xs: 6, sm: 8 },
-        px: { xs: 2, sm: 4 },
+        px: { xs: 2, sm: 4,md: 10, lg: 14 },
         mt: "auto",
         fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
       }}
@@ -38,7 +38,7 @@ export default function Footer() {
         {/* IMPORTANT: remove space-between so the right side isn't forced to the edge */}
         <Grid 
         container 
-        spacing={{ xs: 3, sm: 4, md: 6 }}
+        spacing={{ xs: 3, sm: 5, md: 8 }}
          alignItems="flex-start"
         justifyContent= "flex-start"
         sx={{
@@ -105,13 +105,14 @@ export default function Footer() {
            md={8} 
            lg={8} 
            sx={{ 
-            px:{ xs: 2, sm: 3, md: 0 },pl: { lg: 10 },
-            mt:{ xs: 1, md: 2 },
+            px:{ xs: 2, sm: 3, md: 0 },
+            pr: { md: 4, lg: 6 },
+           
              }} >
             <Grid
              container
              rowSpacing={{ xs: 2, sm: 4, md: 6 }}
-    columnSpacing={{ xs: 1.5, sm: 3, md: 5 }}
+             columnSpacing={{ xs: 1.5, sm: 3, md: 5 }}
             justifyContent={{ xs: "center", md: "flex-start" }}
              sx={{ textAlign: { xs: "center", sm: "left"},
             
