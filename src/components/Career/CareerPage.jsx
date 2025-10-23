@@ -36,16 +36,16 @@ function CareerPage() {
   };
 
 
-  
+
 
   return (
     <>
       <div>
-       
+
         <div>
           <CareerGradiantTop />
         </div>
-        
+
         <div>
           <CareerGradiantBottom />
         </div>
@@ -94,14 +94,14 @@ function CareerPage() {
             <div className="space-y-4">
               {currentJobs.map(job => (
                 <Link key={job.id} to={`/career/${job.id}`}>
-                  <motion.div 
-                      whileHover={{
-                        scale: 1.1,
-                        
-                        transition: { duration: 1 }
-                      }}
-                      
-                      transition={{ duration: 1 }}
+                  <motion.div
+                    whileHover={{
+                      scale: 1.1,
+
+                      transition: { duration: 1 }
+                    }}
+
+                    transition={{ duration: 1 }}
                     className="bg-gray-900/50 my-5 backdrop-blur border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-all cursor-pointer group"
                   >
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between">
@@ -111,26 +111,39 @@ function CareerPage() {
                         </h3>
                         <p className="text-gray-400">{job.description}</p>
                       </div>
-          {/* Job Listings (paginated) */}
-          <div className="space-y-4">
-            {currentJobs.map(job => (
-              <Link key={job.id} to={`/career/${job.id}`}>
-                <div
-                  className="bg-gray-900/50 my-5 backdrop-blur border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-all cursor-pointer group"
-                >
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-400 transition-colors">
-                        {job.title}
-                      </h3>
-                      <p className="text-gray-400">{job.description}</p>
-                    </div>
+                      {/* Job Listings (paginated) */}
+                      <div className="space-y-4">
+                        {currentJobs.map(job => (
+                          <Link key={job.id} to={`/career/${job.id}`}>
+                            <motion.div
+                              className="bg-gray-900/50 my-5 backdrop-blur border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-all cursor-pointer group"
+                            >
+                              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                                <div className="flex-1">
+                                  <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-400 transition-colors">
+                                    {job.title}
+                                  </h3>
+                                  <p className="text-gray-400">{job.description}</p>
+                                </div>
 
+                                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+                                  <span className="text-sm text-gray-400 uppercase tracking-wide">
+                                    {job.department}
+                                  </span>
+                                  <div className="flex items-center gap-2 text-gray-400">
+                                    <span className="text-sm">{job.location}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </motion.div>
+                          </Link>
+                        ))}
+                      </div>
                       <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
                         <span className="text-sm text-gray-400 uppercase tracking-wide">
                           {job.department}
                         </span>
-                        <div className="flex items-center gap-2 text-gray-400">
+                        <div className="flex items-center gap-3 text-gray-400">
                           <span className="text-sm">{job.location}</span>
                         </div>
                       </div>
@@ -139,19 +152,6 @@ function CareerPage() {
                 </Link>
               ))}
             </div>
-                    <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
-                      <span className="text-sm text-gray-400 uppercase tracking-wide">
-                        {job.department}
-                      </span>
-                      <div className="flex items-center gap-3 text-gray-400">
-                        <span className="text-sm">{job.location}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
 
             {/* No Results */}
             {filteredJobs.length === 0 && (
