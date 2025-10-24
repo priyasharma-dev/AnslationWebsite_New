@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import { jobData } from "../../libs/data.js"
 import { Link } from 'react-router-dom';
 import { CareerGradiantBottom, CareerGradiantTop } from '../../gradient/gradiant.jsx';
@@ -31,9 +31,48 @@ function CareerPage() {
   const startIdx = (page - 1) * PAGE_SIZE;
   const currentJobs = filteredJobs.slice(startIdx, startIdx + PAGE_SIZE);
 
-  const handleFilterClick = (categoryName) => {
-    setActiveFilter(categoryName);
-  };
+  // const handleFilterClick = (categoryName) => {
+  //   setActiveFilter(categoryName);
+  // };
+
+  const listRef = useRef(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+
+  const scrollBy = (offset) => {
+if (listRef.current) {
+listRef.current.scrollBy({ left: offset, behavior: 'smooth' });
+}
+};
+
+const updateArrows = () => {
+if (!listRef.current) return;
+const el = listRef.current;
+setCanLeft(el.scrollLeft > 0);
+setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+};
+
+  useEffect(() => {
+    updateArrows();
+    const el = listRef.current;
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      updateArrows();
+    };
+    if (!el) return;
+    el.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows);
+    return () => {
+      el.removeEventListener("scroll", updateArrows);
+      window.removeEventListener("resize", updateArrows);
+    };
+  }, []);
+
+   const showScrollArrows = listRef.current?.scrollWidth > listRef.current?.clientWidth;
+  const shouldShowLeft = isMobile || showScrollArrows;
+  const shouldShowRight = isMobile ||showScrollArrows;
 
 
 
@@ -88,90 +127,64 @@ function CareerPage() {
                   ))}
                 </div>
               </div>
+
+               {shouldShowRight && (
+             <button
+               className="absolute right-1 top-1/2 -translate-y-1/2 z-20 bg-black/40 p-2 rounded-full"
+               onClick={() => scrollBy(150)}
+              >
+              ▶
+             </button>
+               )}
             </div>
 
-            {/* Job Listings (paginated) */}
-            <div className="space-y-4">
-              {currentJobs.map(job => (
-                <Link key={job.id} to={`/career/${job.id}`}>
-                  <motion.div
-                    whileHover={{
-                      scale: 1.1,
+          {/* Job Listings (paginated) */}
+          <div className="space-y-4">
+            {currentJobs.map(job => (
+              <Link key={job.id} to={`/career/${job.id}`}>
+                <div
+                  className="bg-gray-900/50 my-5 backdrop-blur border border-gray-800 rounded-xl p-4 sm:p-6 hover:border-gray-700 transition-all cursor-pointer group"
+                >
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg sm:text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">
+                        {job.title}
+                      </h3>
+                      <p className="text-gray-400 text-sm sm:text-base">{job.description}</p>
+                    </div>
 
-                      transition: { duration: 1 }
-                    }}
-
-                    transition={{ duration: 1 }}
-                    className="bg-gray-900/50 my-5 backdrop-blur border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-all cursor-pointer group"
-                  >
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">
-                          {job.title}
-                        </h3>
-                        <p className="text-gray-400">{job.description}</p>
-                      </div>
-                      {/* Job Listings (paginated) */}
-                      <div className="space-y-4">
-                        {currentJobs.map(job => (
-                          <Link key={job.id} to={`/career/${job.id}`}>
-                            <motion.div
-                              className="bg-gray-900/50 my-5 backdrop-blur border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-all cursor-pointer group"
-                            >
-                              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                                <div className="flex-1">
-                                  <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-400 transition-colors">
-                                    {job.title}
-                                  </h3>
-                                  <p className="text-gray-400">{job.description}</p>
-                                </div>
-
-                                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
-                                  <span className="text-sm text-gray-400 uppercase tracking-wide">
-                                    {job.department}
-                                  </span>
-                                  <div className="flex items-center gap-2 text-gray-400">
-                                    <span className="text-sm">{job.location}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </motion.div>
-                          </Link>
-                        ))}
-                      </div>
-                      <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
-                        <span className="text-sm text-gray-400 uppercase tracking-wide">
-                          {job.department}
-                        </span>
-                        <div className="flex items-center gap-3 text-gray-400">
-                          <span className="text-sm">{job.location}</span>
-                        </div>
+                    <div className="flex flex-col md:flex-row md:items-center gap-2 sm:gap-4 mt-4 md:mt-0">
+                      <span className="text-sm text-gray-400 uppercase tracking-wide">
+                        {job.department}
+                      </span>
+                      <div className="flex items-center gap-3 text-gray-400">
+                        <span className="text-sm">{job.location}</span>
                       </div>
                     </div>
                   </motion.div>
                 </Link>
               ))}
             </div>
+          )}
 
-            {/* No Results */}
-            {filteredJobs.length === 0 && (
-              <div className="text-center py-16">
-                <p className="text-gray-400 text-lg">No positions available in this category at the moment.</p>
-              </div>
-            )}
+          {/* Pagination controls */}
+          {filteredJobs.length > 0 && totalPages > 1 && (
+            <div className="mt-8 flex items-center justify-between
+            flex-col gap-4 sm:flex-row sm:gap-0
+             ">
+              {/* Showing count */}
+              <span className="text-sm text-gray-400 text-center sm:text-left">
+                Showing {startIdx + 1}–{Math.min(startIdx + PAGE_SIZE, filteredJobs.length)} of {filteredJobs.length}
+              </span>
 
-            {/* Pagination controls */}
-            {filteredJobs.length > 0 && totalPages > 1 && (
-              <div className="mt-8 flex items-center justify-between">
-                <span className="text-sm text-gray-400">
-                  Showing {startIdx + 1}–{Math.min(startIdx + PAGE_SIZE, filteredJobs.length)} of {filteredJobs.length}
-                </span>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setPage(p => Math.max(1, p - 1))}
-                    disabled={page === 1}
-                    className={`px-4 py-2 rounded-md border transition ${page === 1
+              <div className="
+              flex items-center gap-2 
+              flex-wrap justify-center">
+                <button
+                  onClick={() => setPage(p => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className={`px-4 py-2 rounded-md border transition text-sm sm:text-base ${
+                    page === 1
                       ? 'cursor-not-allowed border-gray-800 text-gray-600 bg-gray-900/50'
                       : 'border-gray-700 bg-gray-800 hover:bg-gray-700 text-white'
                       }`}
@@ -184,10 +197,11 @@ function CareerPage() {
                     Page {page} of {totalPages}
                   </span>
 
-                  <button
-                    onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-                    disabled={page === totalPages}
-                    className={`px-4 py-2 rounded-md border transition ${page === totalPages
+                <button
+                  onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  className={`px-4 py-2 rounded-md border transition text-sm sm:text-base${
+                    page === totalPages
                       ? 'cursor-not-allowed border-gray-800 text-gray-600 bg-gray-900/50'
                       : 'border-gray-700 bg-gray-800 hover:bg-gray-700 text-white'
                       }`}
