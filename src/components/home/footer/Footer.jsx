@@ -33,21 +33,24 @@ export default function Footer() {
         fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
       }}
     >
-        <Divider sx={{ borderColor: "rgba(255,255,255)", }} />
+        <Divider sx={{ borderColor: "rgba(255,255,255)",
+           pt: { md: 2, lg: 3 }, }} />
       <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4 } }}> 
-        {/* IMPORTANT: remove space-between so the right side isn't forced to the edge */}
+        
         <Grid 
         container 
-        spacing={{ xs: 3, sm: 5, md: 8 }}
+        spacing={{ xs: 3, sm: 5, md: 6 }}
          alignItems="flex-start"
         justifyContent= "flex-start"
-        sx={{
-           "& .MuiGrid-item": {
-      textAlign: { textAlign: {xs: "center", md: "left" }},
-        },
-      }}
+         sx={{
+            "& .MuiGrid-item": {
+       textAlign: { textAlign: {xs: "left", md: "left" }},
+         },
+       }}
         direction={{ xs: "column", sm: "column", md: "row" }}
-         className="px-4 "   >
+         className="px-4 "
+          >
+            
           {/* LEFT SIDE - Brand */}
           <Grid item xs={12} sm={12} md={4} lg={3} 
           sx={{mt:{ xs: 1, md: 2,lg:4 },
@@ -105,27 +108,60 @@ export default function Footer() {
            md={8} 
            lg={8} 
            sx={{ 
-            px:{ xs: 2, sm: 3, md: 0 },
-            pr: { md: 4, lg: 6 },
-           
+            pl: 0, pr: 0, mx: 0,overflowX: "hidden",
+             "@media (min-width:600px) and (max-width:712.98px)": {
+                flexBasis: "100% !important",
+                maxWidth: "100% !important",
+                width: "100% !important",
+                mt: 2, // small spacing below the brand
+              }, 
              }} >
-            <Grid
-             container
-             rowSpacing={{ xs: 2, sm: 4, md: 6 }}
-             columnSpacing={{ xs: 1.5, sm: 3, md: 5 }}
-            justifyContent={{ xs: "center", md: "flex-start" }}
-             sx={{ textAlign: { xs: "center", sm: "left"},
-            
-              "& .MuiStack-root": {
-                alignItems: { xs: "center", sm: "flex-start" },
-               },
-               "& a": { lineHeight: { xs: 1.3, sm: 1.5 } },
-            
-          }}
-            >
+
+               <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: {
+                  xs: "repeat(1, minmax(0, 1fr))",
+                  sm: "repeat(2, minmax(0, 1fr))",
+                  md: "repeat(4, minmax(0, 1fr))", 
+                },
+                gap: { xs: 2, sm: 3, md: 4 },
+                mt:2,
+                alignItems: "start",
+
+              
+
+                // 420–591px: stay 2 cols, slightly tighter
+                // "@media (min-width:420px) and (max-width:591.98px)": {
+                //   gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                //   columnGap: 12,
+                //   rowGap: 8,
+                //   "& .footer-link": { fontSize: 14 },
+                //   "& .footer-heading": { marginBottom: 2 },
+                // },
+
+                // 600–712px: 2 cols, tighten to avoid odd wraps
+                "@media (min-width:600px) and (max-width:712.98px)": {
+                  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                  columnGap: 14,
+                  rowGap: 8,
+                  "& .footer-link": { fontSize: 14 },
+                  "& .footer-heading": { marginBottom: 2 },
+                },
+
+                  // ✅ 713–899px: still 2 cols (explicit)
+              "@media (min-width:713px) and (max-width:899.98px)": {
+               gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+               columnGap: 16,
+                 rowGap: 8,
+                 },
+              }}
+              >
+          
               {/* Product */}
-              <Grid item xs={12} sm={6} md={3} sx={{mb:{xs:2}}}>
+               <Box sx={{ minWidth: 0 }}>
                 <Typography 
+                 className="footer-heading"
                 fontSize={{ xs: 18, sm: 20, md: 22 }}
                  fontWeight={700} 
                  mb={{ xs: 1, sm: 1.5 }}
@@ -139,11 +175,12 @@ export default function Footer() {
                   <Link href="#" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">K-tech tool</Link>
                   <Link href="#" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Trackers</Link>
                 </Stack>
-              </Grid>
+              </Box>
 
               {/* Service */}
-              <Grid item xs={12} sm={6} md={3} sx={{mb:{xs:2}}}>
+               <Box sx={{minWidth:0 }}>
                 <Typography
+                className="footer-heading" 
                  fontSize={{ xs: 18, sm: 20, md: 22 }} 
                  fontWeight={700}
                   mb={{ xs: 1, sm: 1.5 }}>
@@ -155,11 +192,12 @@ export default function Footer() {
                   <Link href="#" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Marketing Automation</Link>
                   <Link href="#" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Chat support</Link>
                 </Stack>
-              </Grid>
+               </Box>
 
               {/* Company */}
-              <Grid item xs={12} sm={6} md={3} sx={{mb:{xs:2}}}>
+               <Box sx={{ minWidth: 0 }} >
                 <Typography 
+                className="footer-heading"
                 fontSize={{ xs: 18, sm: 20, md: 22 }} 
                 fontWeight={700} 
                 mb={{ xs: 1, sm: 1.5 }}>
@@ -179,29 +217,37 @@ export default function Footer() {
                   <Link href="#" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Culture</Link>
                   <Link href="#" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Blog</Link>
                 </Stack>
-              </Grid>
+                </Box>
 
               {/* Contact */}
-              <Grid item xs={12} sm={6} md={3} sx={{mb:{xs:2}}}>
-                <Typography fontSize={{ xs: 18, sm: 20, md: 22 }} fontWeight={700} mb={{ xs: 1, sm: 1.5 }}>
+              <Box sx={{minWidth:0}}>
+                <Typography className="footer-heading" fontSize={{ xs: 18, sm: 20, md: 22 }} fontWeight={700} mb={{ xs: 1, sm: 1.5 }}>
                   Contact us
                 </Typography>
                 <Stack spacing={{ xs: 0.6, sm: 1, md: 1.4, lg: 2 }}>
-                  <Stack direction="row" spacing={1} alignItems="center" justifyContent={{ xs: "center", sm: "flex-start" }}>
+                  <Stack direction="row" spacing={1} alignItems="center" >
                     <Email fontSize="small" />
-                    <Typography fontSize={{ xs: 16, sm: 17, md: 18 }}>Help@anslation.com</Typography>
+                    <Typography fontSize={{ xs: 16, sm: 17, md: 18 }}
+                    sx={{
+                     minWidth: 0,
+                     maxWidth: "100%",
+                     overflowWrap: "anywhere",   // ← allows breaking inside long tokens
+                     wordBreak: "break-word",
+                     lineHeight: 1.4,
+                     }}
+                    >Help@anslation.com</Typography>
                   </Stack>
-                  <Stack direction="row" spacing={1} alignItems="center" justifyContent={{ xs: "center", sm: "flex-start" }}>
+                  <Stack direction="row" spacing={1} alignItems="center" justifyContent="flex-start" sx={{ mt: 0.5 }}  >
                     <Phone fontSize="small" />
                     <Typography fontSize={{ xs: 16, sm: 17, md: 18 }}>(414) 687 - 5892</Typography>
                   </Stack>
-                  <Stack direction="row" spacing={1} alignItems="center" justifyContent={{ xs: "center", sm: "flex-start" }}>
+                  <Stack direction="row" spacing={1} alignItems="center" justifyContent="flex-start"  sx={{ mt: 0.5 }} >
                     <LocationOn fontSize="small" />
                     <Typography fontSize={{ xs: 16, sm: 17, md: 18 }}>Betul | Gurugram</Typography>
                   </Stack>
                 </Stack>
-              </Grid>
-            </Grid>
+              </Box>
+            </Box>
           </Grid>
         </Grid>
 
