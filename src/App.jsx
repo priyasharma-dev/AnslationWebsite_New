@@ -10,6 +10,8 @@ import Product from "./pages/Product";
 import Gradiant from "./gradient/gradiant";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
+import CenterAnimation from "./gradient/centerAnimation";
+
 
 
 
@@ -30,6 +32,7 @@ function App() {
         
           </Route>
           <Route  path="/gradiant"  element={<Gradiant/>} />
+          <Route  path="/animation" element={<CenterAnimation/>} />
 
         </Routes>
       </Box>
