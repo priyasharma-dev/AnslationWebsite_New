@@ -192,6 +192,19 @@ export default function Footer() {
                 >
                   Company
                 </Typography>
+                <Stack spacing={{ xs: 0.6, sm: 1, md: 1.4, lg: 2 }}>
+                  <Link
+                    href="/about"
+                    color="inherit"
+                    fontSize={{ xs: 16, sm: 17, md: 18 }}
+                    underline="hover"
+                  >
+                    About
+                  </Link>                 
+                   <Link href="#" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Contact us</Link>
+                  <Link href="/career" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Careers</Link>
+                  <Link href="#" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Culture</Link>
+                  <Link href="/blog" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Blog</Link>
                 <Stack spacing={1.5}>
                   {footerLinks.company.map((link) => (
                     <Link
