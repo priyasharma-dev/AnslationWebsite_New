@@ -8,9 +8,12 @@ import Career from "./pages/Career";
 import CareerProfile from "./components/Career/CareerProfile";
 import Product from "./pages/Product";
 import Gradiant from "./gradient/gradiant";
+
+
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import CenterAnimation from "./gradient/centerAnimation";
+
 
 
 
@@ -21,6 +24,7 @@ function App() {
     <Router>
       <Box>
         <Routes>
+
           <Route element={<MainLayout/>} >
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />        
@@ -34,6 +38,10 @@ function App() {
           <Route  path="/gradiant"  element={<Gradiant/>} />
           <Route  path="/animation" element={<CenterAnimation/>} />
 
+
+          {/* {Footer Routes} */}
+
+       
         </Routes>
       </Box>
     </Router>

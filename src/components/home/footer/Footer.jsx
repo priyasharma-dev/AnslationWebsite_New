@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Container,
@@ -7,298 +7,357 @@ import {
   Link,
   Divider,
   Stack,
+  IconButton,
+  Button,
+  Paper,
 } from "@mui/material";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
+import { MessageCircle } from "lucide-react";
 import instagram from "../../../assets/Instagram 2.png";
 import linked from "../../../assets/LinkedIn 2.png";
 import Twitter from "../../../assets/Twitter.png";
 import youtube from "../../../assets/Youtube.png";
 import fac from "../../../assets/Facebook 2.png";
+import ChatSupport from "../footer/Footer_Services/Chat_Support/ChatSupport";
+import { scale } from "framer-motion";
 
 export default function Footer() {
-  const footerLinks = {
-    product: [
-      { label: "Ads-astra", href: "#" },
-      { label: "Anslatíon tools", href: "#" },
-      { label: "OS.Anslation", href: "#" },
-      { label: "K-tech tool", href: "#" },
-      { label: "Trackers", href: "#" },
-    ],
-    service: [
-      { label: "Performance Analytics", href: "#" },
-      { label: "Software Infrastructure", href: "#" },
-      { label: "Marketing Automation", href: "#" },
-      { label: "Chat support", href: "#" },
-    ],
-    company: [
-      { label: "About", href: "/about" },
-      { label: "Contact us", href: "#" },
-      { label: "Careers", href: "/career" },
-      { label: "Culture", href: "#" },
-      { label: "Blog", href: "#" },
-    ],
-  };
+  const [openChat, setOpenChat] = useState(false);
+  const [showMessage, setShowMessage] = useState(true);
+  const [footerInView, setFooterInView] = useState(false);
 
-  const socialIcons = [
-    { src: fac, alt: "Facebook" },
-    { src: instagram, alt: "Instagram" },
-    { src: linked, alt: "LinkedIn" },
-    { src: Twitter, alt: "Twitter" },
-    { src: youtube, alt: "YouTube" },
-  ];
+  // 🔁 1️⃣ Text animation (every 2 sec toggle)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (footerInView && !openChat) {
+        setShowMessage((prev) => !prev);
+      } else {
+        setShowMessage(false);
+      }
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [footerInView, openChat]);
+
+  // 👁️ 2️⃣ Detect when footer is visible
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setFooterInView(entry.isIntersecting);
+      },
+      { threshold: 0.3 } // Trigger when ~30% of footer visible
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div>
-      <Divider sx={{ borderColor: "rgba(255,255,255)", mb: { xs: 4, md: 6 } }} />
-        <Box
+    <Box
       component="footer"
       sx={{
         width: "100%",
+        bgcolor: "transparent",
         background: "linear-gradient(to bottom, #0a0a0f, #00103a)",
         color: "white",
-        py: { xs: 4, sm: 6, md: 8 },
-        px: { xs: 2, sm: 3, md: 4 , lg:0},
+        py: { xs: 6, sm: 8 },
+        px: { xs: 2, sm: 4, md: 10, lg: 14 },
+        mt: "auto",
+        position: "relative",
       }}
     >
-      <Container maxWidth="xl" className="w-full" >
-        <Grid container spacing={{ xs: 4, md: 6 }} className="lg:flex   lg:justify-evenly" >
-          {/* Brand Section */}
-        
-          <Grid item xs={12} md={4} lg={3}  >
-            <Typography
-              component="h2"
-              sx={{
-                fontSize: { xs: 20, sm: 24, lg:32 },
-                mr: { lg: 6 }, // smaller margin for that range
-                '@media (min-width:1024px) and (max-width:1154px)': {
-                  mr: 0,
-                  textAlign: 'center',
-                },
-              }}
-            >
+      <Divider
+        sx={{ borderColor: "rgba(255,255,255)", pt: { md: 2, lg: 3 } }}
+      />
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 4 } }}>
+        <Grid
+          container
+          spacing={{ xs: 3, sm: 5, md: 6 }}
+          alignItems="flex-start"
+          justifyContent="flex-start"
+          direction={{ xs: "column", sm: "column", md: "row" }}
+          className="px-4"
+        >
+          {/* LEFT SIDE - Brand */}
+          <Grid item xs={12} sm={12} md={4} lg={3}>
+            <Typography fontSize={{ xs: 26, sm: 30, md: 34 }} fontWeight={600}>
               Anslatíon
             </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: 15, sm: 16, lg:20 },
-                mb: 2,
-                lineHeight: 1.6,
-                color: "rgba(255,255,255,0.9)",
-              }}
-            >
+            <Typography fontSize={{ xs: 15, sm: 16 }} mb={2} lineHeight={1.6}>
               Driven by Questions.
               <br />
-              Delivered as Solutions
+              Delivered as Solutions.
             </Typography>
-
-            {/* Social Icons */}
-            <Stack direction="row" spacing={1.5} sx={{ mt: 3 }}>
-              {socialIcons.map((icon) => (
-                <Link
-                  key={icon.alt}
-                  href="#"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    transition: "opacity 0.2s",
-                    "&:hover": { opacity: 0.7 },
-                  }}
-                  aria-label={icon.alt}
-                >
-                  <Box
-                    component="img"
-                    src={icon.src}
-                    alt={icon.alt}
-                    sx={{ width: 20, height: 20 }}
-                  />
-                </Link>
-              ))}
-            </Stack>
+            <div className="flex mb-4 gap-2">
+              <img src={fac} alt="fac" className="w-5 h-5" />
+              <img src={instagram} alt="instgram" className="w-5 h-5" />
+              <img src={linked} alt="linked" className="w-5 h-5" />
+              <img src={Twitter} alt="twitter" className="w-5 h-5" />
+              <img src={youtube} alt="youtube" className="w-5 h-5" />
+            </div>
           </Grid>
 
-          {/* Links Section */}
-          <Grid item xs={12} md={8} lg={9}>
-            <Grid container spacing={{ xs: 3, sm: 4, md: 3 }}>
+          {/* RIGHT SIDE - Links */}
+          <Grid item xs={12} md={8} lg={8}>
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: {
+                  xs: "repeat(1, minmax(0, 1fr))",
+                  sm: "repeat(2, minmax(0, 1fr))",
+                  md: "repeat(4, minmax(0, 1fr))",
+                },
+                gap: { xs: 2, sm: 3, md: 4 },
+                mt: 2,
+              }}
+            >
               {/* Product */}
-              <Grid item xs={12} sm={6} md={3}>
+              <Box>
                 <Typography
-                  sx={{
-                    fontSize: { xs: 18, sm: 20, md: 22 },
-                    fontWeight: 700,
-                    mb: { xs: 1.5, md: 2 },
-                  }}
+                  fontSize={{ xs: 18, sm: 20, md: 22 }}
+                  fontWeight={700}
                 >
                   Product
                 </Typography>
-                <Stack spacing={1.5}>
-                  {footerLinks.product.map((link) => (
-                    <Link
-                      key={link.label}
-                      href={link.href}
-                      color="inherit"
-                      underline="hover"
-                      sx={{
-                        fontSize: { xs: 15, sm: 16, md: 17 },
-                        color: "rgba(255,255,255,0.85)",
-                        transition: "color 0.2s",
-                        "&:hover": { color: "white" },
-                      }}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+                <Stack spacing={1}>
+                  <Link href="#" color="inherit" underline="hover">
+                    Ads-astra
+                  </Link>
+                  <Link href="#" color="inherit" underline="hover">
+                    Anslatíon tools
+                  </Link>
+                  <Link href="#" color="inherit" underline="hover">
+                    OS.Anslation
+                  </Link>
+                  <Link href="#" color="inherit" underline="hover">
+                    K-tech tool
+                  </Link>
+                  <Link href="#" color="inherit" underline="hover">
+                    Trackers
+                  </Link>
                 </Stack>
-              </Grid>
+              </Box>
 
               {/* Service */}
-              <Grid item xs={12} sm={6} md={3}>
+              <Box>
                 <Typography
-                  sx={{
-                    fontSize: { xs: 18, sm: 20, md: 22 },
-                    fontWeight: 700,
-                    mb: { xs: 1.5, md: 2 },
-                  }}
+                  fontSize={{ xs: 18, sm: 20, md: 22 }}
+                  fontWeight={700}
                 >
                   Service
                 </Typography>
-                <Stack spacing={1.5}>
-                  {footerLinks.service.map((link) => (
-                    <Link
-                      key={link.label}
-                      href={link.href}
-                      color="inherit"
-                      underline="hover"
-                      sx={{
-                        fontSize: { xs: 15, sm: 16, md: 17 },
-                        color: "rgba(255,255,255,0.85)",
-                        transition: "color 0.2s",
-                        "&:hover": { color: "white" },
-                      }}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+                <Stack spacing={1}>
+                  <Link href="#" color="inherit" underline="hover">
+                    Performance Analytics
+                  </Link>
+                  <Link href="#" color="inherit" underline="hover">
+                    Software Infrastructure
+                  </Link>
+                  <Link href="#" color="inherit" underline="hover">
+                    Marketing Automation
+                  </Link>
+
+                  {/* 🔥 Chat Support Toggle */}
+                  <Button
+                    onClick={() => setOpenChat(!openChat)}
+                    sx={{
+                      color: "white",
+                      textTransform: "none",
+                      justifyContent: "flex-start",
+                      padding: 0,
+                      fontSize: { xs: 16, sm: 17, md: 18 },
+                      "&:hover": { textDecoration: "underline" },
+                    }}
+                  >
+                    {openChat ? "Close Chat Support" : "Open Chat Support"}
+                  </Button>
                 </Stack>
-              </Grid>
+              </Box>
 
               {/* Company */}
-              <Grid item xs={12} sm={6} md={3}>
+              <Box>
                 <Typography
-                  sx={{
-                    fontSize: { xs: 18, sm: 20, md: 22 },
-                    fontWeight: 700,
-                    mb: { xs: 1.5, md: 2 },
-                  }}
+                  fontSize={{ xs: 18, sm: 20, md: 22 }}
+                  fontWeight={700}
                 >
                   Company
                 </Typography>
-
-                 <Stack spacing={{ xs: 0.6, sm: 1, md: 1.4, lg: 2 }}>
-                  <Link
-                    href="/about"
-                    color="inherit"
-                    fontSize={{ xs: 16, sm: 17, md: 18 }}
-                    underline="hover"
-                  >
+                <Stack spacing={1}>
+                  <Link href="/about" color="inherit" underline="hover">
                     About
-                  </Link>                 
-                   <Link href="#" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Contact us</Link>
-                  <Link href="/career" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Careers</Link>
-                  <Link href="#" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Culture</Link>
-                  <Link href="/blog" color="inherit" fontSize={{ xs: 16, sm: 17, md: 18 }} underline="hover">Blog</Link>
-                   </Stack> 
-              </Grid>
+                  </Link>
+                  <Link href="#" color="inherit" underline="hover">
+                    Contact us
+                  </Link>
+                  <Link href="/career" color="inherit" underline="hover">
+                    Careers
+                  </Link>
+                  <Link href="#" color="inherit" underline="hover">
+                    Culture
+                  </Link>
+                  <Link href="#" color="inherit" underline="hover">
+                    Blog
+                  </Link>
+                </Stack>
+              </Box>
 
               {/* Contact */}
-              <Grid item xs={12} sm={6} md={3}>
+              <Box>
                 <Typography
-                  sx={{
-                    fontSize: { xs: 18, sm: 20, md: 22 },
-                    fontWeight: 700,
-                    mb: { xs: 1.5, md: 2 },
-                  }}
+                  fontSize={{ xs: 18, sm: 20, md: 22 }}
+                  fontWeight={700}
                 >
                   Contact us
                 </Typography>
-                <Stack spacing={1.5}>
+                <Stack spacing={1}>
                   <Stack direction="row" spacing={1} alignItems="center">
-                    <Email sx={{ fontSize: 18 }} />
-                    <Typography
-                      sx={{
-                        fontSize: { xs: 15, sm: 16, md: 17 },
-                        color: "rgba(255,255,255,0.85)",
-                        wordBreak: "break-word",
-                      }}
-                    >
+                    <Email fontSize="small" />
+                    <Typography fontSize={{ xs: 16, sm: 17, md: 18 }}>
                       Help@anslation.com
                     </Typography>
                   </Stack>
                   <Stack direction="row" spacing={1} alignItems="center">
-                    <Phone sx={{ fontSize: 18 }} />
-                    <Typography
-                      sx={{
-                        fontSize: { xs: 15, sm: 16, md: 17 },
-                        color: "rgba(255,255,255,0.85)",
-                      }}
-                    >
+                    <Phone fontSize="small" />
+                    <Typography fontSize={{ xs: 16, sm: 17, md: 18 }}>
                       (414) 687 - 5892
                     </Typography>
                   </Stack>
                   <Stack direction="row" spacing={1} alignItems="center">
-                    <LocationOn sx={{ fontSize: 18 }} />
-                    <Typography
-                      sx={{
-                        fontSize: { xs: 15, sm: 16, md: 17 },
-                        color: "rgba(255,255,255,0.85)",
-                      }}
-                    >
+                    <LocationOn fontSize="small" />
+                    <Typography fontSize={{ xs: 16, sm: 17, md: 18 }}>
                       Betul | Gurugram
                     </Typography>
                   </Stack>
                 </Stack>
-              </Grid>
-            </Grid>
+              </Box>
+            </Box>
           </Grid>
-          
         </Grid>
-        
 
-        <Divider sx={{ borderColor: "rgba(255,255,255,0.2)", my: { xs: 4, md: 6 } }} />
+        <Divider
+          sx={{
+            borderColor: "rgba(255,255,255,0.3)",
+            my: { xs: 3.5, sm: 5, md: 6 },
+          }}
+        />
 
-        {/* Bottom Section */}
+        {/* Bottom Row */}
         <Box
           sx={{
             display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
+            flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
-            alignItems: "center",
-            gap: 2,
+            alignItems: { xs: "center", sm: "center" },
             color: "rgba(255,255,255,0.85)",
           }}
         >
-          <Typography sx={{ fontSize: { xs: 14, sm: 16 } }}>
+          <Typography fontSize={{ xs: 16, sm: 20 }}>
             Copyright © 2025
           </Typography>
-
           <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 1, sm: 2 }}
+            direction="row"
+            spacing={2}
             alignItems="center"
-            sx={{ fontSize: { xs: 14, sm: 16 } }}
+            flexWrap="wrap"
+            justifyContent="center"
           >
             <Typography>All Rights Reserved</Typography>
-            <Box sx={{ display: { xs: "none", sm: "block" }, opacity: 0.6 }}>|</Box>
-            <Link href="#" color="inherit" underline="hover">
+            <Link href="#" underline="hover" color="inherit">
               Terms and Conditions
             </Link>
-            <Box sx={{ display: { xs: "none", sm: "block" }, opacity: 0.6 }}>|</Box>
-            <Link href="#" color="inherit" underline="hover">
+            <Link href="#" underline="hover" color="inherit">
               Privacy Policy
             </Link>
           </Stack>
         </Box>
       </Container>
+
+      {/* 💬 Floating Chat Icon + Text */}
+      {footerInView && (
+        <Box
+          sx={{
+            position: "fixed",
+            bottom: 25,
+            right: 25,
+            zIndex: 3000,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+          }}
+        >
+          {showMessage && !openChat && (
+            <Paper
+              elevation={4}
+              sx={{
+                background: "#1976d2",
+                color: "white",
+                p: 1.2,
+                borderRadius: "10px",
+                mb: 1.5,
+                fontSize: "14px",
+                transition: "opacity 0.6s ease",
+                animation: "fadeInOut 3s infinite",
+                "@keyframes fadeInOut": {
+                  "0%, 100%": { opacity: 0 },
+                  "50%": { opacity: 1 },
+                },
+              }}
+            >
+              💬 Need help? Talk to our bot!
+            </Paper>
+          )}
+
+          <IconButton
+            onClick={() => setOpenChat(!openChat)}
+            sx={{
+              backgroundColor: "#1976d2",
+              color: "white",
+              width: 50,
+              height: 50,
+              boxShadow: "0px 10px 20px rgba(0,0,0,0.8)",
+              "&:hover": { 
+                backgroundColor: "#1258a2",
+              
+              
+              },
+            }}
+          >
+            <MessageCircle size={23} />
+          </IconButton>
         </Box>
-    </div>
+      )}
+
+      {/* ✅ Chat Box */}
+     {/* ✅ Chat Box */}
+
+{/* ✅ Chat Box */}
+{openChat && (
+  <Box
+    sx={{
+      position: "fixed",
+      bottom: 100,
+      right: 30,
+      zIndex: 9999, // 🔼 increased to ensure it's visible
+      width: { xs: 300, sm: 360 },
+      height: { xs: 400, sm: 450 },
+     
+     
+      overflow: "hidden",
+     
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    }}
+  >
+  
+    <ChatSupport />
+  </Box>
+)}
+
+
+    </Box>
   );
 }
