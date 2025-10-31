@@ -8,26 +8,25 @@ import Career from "./pages/Career";
 import CareerProfile from "./components/Career/CareerProfile";
 import Product from "./pages/Product";
 import Gradiant from "./gradient/gradiant";
-
-
-
-
+import ChatSupport from "./components/home/footer/Footer_Services/Chat_Support/ChatSupport";
 
 function App() {
   return (
     <Router>
       <Box>
         <Routes>
-          <Route element={<MainLayout/>} >
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />        
-          <Route path="/career" element={<Career/>} />
-          <Route path="/career/:id" element={<CareerProfile/>} />
-          <Route  path="/product" element={<Product/>} />
-        
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/career" element={<Career />} />
+            <Route path="/career/:id" element={<CareerProfile />} />
+            <Route path="/product" element={<Product />} />
           </Route>
-          <Route  path="/gradiant"  element={<Gradiant/>} />
+          <Route path="/gradiant" element={<Gradiant />} />
 
+          {/* {Footer Routes} */}
+
+       
         </Routes>
       </Box>
     </Router>
