@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Container,
@@ -9,19 +9,50 @@ import {
   Stack,
   IconButton,
   Button,
+  Paper,
 } from "@mui/material";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
+import { MessageCircle } from "lucide-react";
 import instagram from "../../../assets/Instagram 2.png";
 import linked from "../../../assets/LinkedIn 2.png";
 import Twitter from "../../../assets/Twitter.png";
 import youtube from "../../../assets/Youtube.png";
 import fac from "../../../assets/Facebook 2.png";
-
-// ✅ Import Chat Support
 import ChatSupport from "../footer/Footer_Services/Chat_Support/ChatSupport";
+import { scale } from "framer-motion";
 
 export default function Footer() {
   const [openChat, setOpenChat] = useState(false);
+  const [showMessage, setShowMessage] = useState(true);
+  const [footerInView, setFooterInView] = useState(false);
+
+  // 🔁 1️⃣ Text animation (every 2 sec toggle)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (footerInView && !openChat) {
+        setShowMessage((prev) => !prev);
+      } else {
+        setShowMessage(false);
+      }
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [footerInView, openChat]);
+
+  // 👁️ 2️⃣ Detect when footer is visible
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setFooterInView(entry.isIntersecting);
+      },
+      { threshold: 0.3 } // Trigger when ~30% of footer visible
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <Box
@@ -128,7 +159,7 @@ export default function Footer() {
                     Marketing Automation
                   </Link>
 
-                  {/* 🔥 Chat Support Toggle Button */}
+                  {/* 🔥 Chat Support Toggle */}
                   <Button
                     onClick={() => setOpenChat(!openChat)}
                     sx={{
@@ -243,20 +274,90 @@ export default function Footer() {
         </Box>
       </Container>
 
-      {/* ✅ Chat Support Component Appears Here */}
-      {openChat && (
+      {/* 💬 Floating Chat Icon + Text */}
+      {footerInView && (
         <Box
           sx={{
             position: "fixed",
-            bottom: 90,
-            right: 30,
-            zIndex: 2000,
-            boxShadow: "0 0 15px rgba(0,0,0,0.4)",
+            bottom: 25,
+            right: 25,
+            zIndex: 3000,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
           }}
         >
-          <ChatSupport />
+          {showMessage && !openChat && (
+            <Paper
+              elevation={4}
+              sx={{
+                background: "#1976d2",
+                color: "white",
+                p: 1.2,
+                borderRadius: "10px",
+                mb: 1.5,
+                fontSize: "14px",
+                transition: "opacity 0.6s ease",
+                animation: "fadeInOut 3s infinite",
+                "@keyframes fadeInOut": {
+                  "0%, 100%": { opacity: 0 },
+                  "50%": { opacity: 1 },
+                },
+              }}
+            >
+              💬 Need help? Talk to our bot!
+            </Paper>
+          )}
+
+          <IconButton
+            onClick={() => setOpenChat(!openChat)}
+            sx={{
+              backgroundColor: "#1976d2",
+              color: "white",
+              width: 50,
+              height: 50,
+              boxShadow: "0px 10px 20px rgba(0,0,0,0.8)",
+              "&:hover": { 
+                backgroundColor: "#1258a2",
+              
+              
+              },
+            }}
+          >
+            <MessageCircle size={23} />
+          </IconButton>
         </Box>
       )}
+
+      {/* ✅ Chat Box */}
+     {/* ✅ Chat Box */}
+
+{/* ✅ Chat Box */}
+{openChat && (
+  <Box
+    sx={{
+      position: "fixed",
+      bottom: 100,
+      right: 30,
+      zIndex: 9999, // 🔼 increased to ensure it's visible
+      width: { xs: 300, sm: 360 },
+      height: { xs: 400, sm: 450 },
+     
+     
+      overflow: "hidden",
+     
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    }}
+  >
+  
+    <ChatSupport />
+  </Box>
+)}
+
+
     </Box>
   );
 }

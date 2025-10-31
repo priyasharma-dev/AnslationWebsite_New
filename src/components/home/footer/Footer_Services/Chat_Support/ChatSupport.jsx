@@ -130,7 +130,8 @@ const ChatSupport = () => {
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={toggleChat}
-              className="relative bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg focus:outline-none transition-all cursor-pointer"
+              className="relative bg-blue-600 hover:bg-blue-700 text-white 
+              p-4 rounded-full shadow-lg focus:outline-none transition-all cursor-pointer"
             >
               <MessageCircle size={23} />
             </motion.button>
@@ -215,7 +216,7 @@ const ChatSupport = () => {
                 <select
                   onChange={handleSolutionSelect}
                   className="w-full border px-4 py-3 rounded-lg text-sm sm:text-base focus:outline-blue-500 
-                  bg-blue-500 text-white hover:bg-blue-800 transition-all cursor-pointer"
+                  bg-blue-600 text-white hover:bg-blue-700 transition-all cursor-pointer"
                   defaultValue=""
                 >
                   <option value="" disabled className="bg-white text-gray-600">
