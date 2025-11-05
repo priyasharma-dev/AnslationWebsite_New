@@ -3,7 +3,7 @@ import { MapPin, Clock, Mail, Phone, Star, Navigation } from 'lucide-react';
 import hero from "../assets/Box.png";
 
 function LocationCard({name , address , WorkingdaysTime,saturday , sunday , email ,  phone , mapUrl}) {
-    console.log(name , address)
+    
   return (
     <div className=" container min-h-screen  py-12 px-4">
       <div className=" mx-auto">
