@@ -1,4 +1,3 @@
-// src/components/culture/ValuesPosterRail.jsx
 import React, { useEffect, useRef, useState } from "react";
 import ValuePosterCardImage from "./ValuePosterCardImage";
 
@@ -158,7 +157,7 @@ export default function ValuesPosterRail({
   return (
     <section className="relative overflow-hidden text-white">
       {/* backdrop */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0B1224] via-[#0C1830] to-[#0B1428]" />
+      {/* <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0B1224] via-[#0C1830] to-[#0B1428]" /> */}
 
       <div className="mx-auto max-w-7xl px-6 py-12">
         <h2 className="text-3xl font-bold tracking-[-0.01em]">{heading}</h2>

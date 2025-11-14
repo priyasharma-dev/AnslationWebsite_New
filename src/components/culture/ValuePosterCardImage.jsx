@@ -1,4 +1,3 @@
-// src/components/culture/ValuePosterCardImage.jsx
 import React from "react";
 
 export default function ValuePosterCardImage({
@@ -7,19 +6,24 @@ export default function ValuePosterCardImage({
   overlayHeading = "",
   overlayCopy = "",
 }) {
+   const hasOverlay = overlayHeading || overlayCopy;
   return (
-    <figure className="w-[300px] shrink-0">
+    <figure 
+    className="
+     shrink-0
+    w-[78vw] xs:w-[68vw] sm:w-[58vw] md:w-[300px]">
       <article
         tabIndex={0}
         className="
-          group relative aspect-[3/4] w-full overflow-hidden rounded-3xl p-[1px]
-          bg-gradient-to-br from-sky-500/45 via-blue-600/25 to-cyan-400/35
+         group relative aspect-[3/4] w-full overflow-hidden
+       rounded-2xl md:rounded-3xl p-[1px]
+           bg-gradient-to-br from-sky-500/45 via-blue-600/25 to-cyan-400/35
           shadow-[0_25px_70px_-25px_rgba(29,78,216,0.5)]
           transition-transform duration-200 hover:-translate-y-1.5 focus-within:-translate-y-1.5
         "
         aria-label={title}
       >
-        <div className="relative h-full w-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
+        <div className="relative h-full w-full overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 bg-white/[0.04]">
           <img
             src={imageSrc}
             alt={title}
@@ -27,11 +31,30 @@ export default function ValuePosterCardImage({
             loading="lazy"
             decoding="async"
           />
+          {/* Mobile/Tablet: readable overlay at bottom (always visible) */}
+          {hasOverlay && (
+            <div className="absolute inset-x-0 bottom-0 z-10 p-3 md:hidden">
+              <div className="rounded-xl bg-gradient-to-t from-[#060E1A]/90 via-[#0B1736]/80 to-transparent p-3 backdrop-blur-[2px]">
+                {overlayHeading && (
+                  <h3 className="text-base xs:text-lg font-bold text-white drop-shadow">
+                    {overlayHeading}
+                  </h3>
+                )}
+                {overlayCopy && (
+                  <p className="mt-1.5 text-xs xs:text-sm leading-relaxed text-white/85">
+                    {overlayCopy}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
 
-          {/* SLIDE from TOP + delayed text */}
+          {/* Desktop: hover/focus slide-in overlay */}
+          {hasOverlay && (
           <div
             className="
               pointer-events-none absolute inset-0
+               hidden md:block
               translate-y-[-100%] opacity-0
               group-hover:translate-y-0 group-hover:opacity-100
               group-focus-within:translate-y-0 group-focus-within:opacity-100
@@ -63,12 +86,13 @@ export default function ValuePosterCardImage({
               </div>
             </div>
           </div>
+          )}
         </div>
       </article>
 
       {/* Title below */}
-      <figcaption className="mt-3">
-        <h4 className="text-lg font-semibold leading-tight text-white">
+      <figcaption className="mt-2.5 md:mt-3">
+        <h4 className="text-base md:text-lg font-semibold leading-tight text-white">
           {title}
         </h4>
       </figcaption>

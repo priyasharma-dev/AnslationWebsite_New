@@ -45,7 +45,7 @@ export default function MainLayout() {
       {/* </div> */}
 
       {/* Main outlet */}
-      <main style={{ ...styles.content, ...styles.main }}>
+      <main style={{ ...styles.content, ...styles.main, paddingInline: 0 }}>
         <Outlet />
       </main>
 
