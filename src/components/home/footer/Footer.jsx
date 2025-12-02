@@ -18,6 +18,7 @@ import Twitter from "../../../assets/Twitter.png";
 import youtube from "../../../assets/Youtube.png";
 import fac from "../../../assets/Facebook 2.png";
 import ChatSupport from "../footer/Footer_Services/Chat_Support/ChatSupport";
+import { color } from "framer-motion";
 
 export default function Footer() {
   const footerLinks = {
@@ -68,268 +69,219 @@ export default function Footer() {
   }, []);
 
   return (
-    <div>
+    <div >
       <Divider sx={{ borderColor: "rgba(255,255,255)" }} />
 
-      <Box
-        component="footer"
-        sx={{
-          width: "100%",
-          background: "linear-gradient(to bottom, #0a0a0f, #00103a)",
-          color: "white",
-          py: { xs: 4, sm: 6, md: 8 },
-          px: { xs: 2, sm: 3, md: 4, lg: 0 },
-        }}
-      >
-        <Container maxWidth="2xl" className="w-full">
-          <Grid
-            container
-            spacing={{ xs: 4, md: 6 }}
-            className="lg:flex lg:justify-evenly xl:flex xl:justify-around"
-          >
-            {/* Brand Section */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Typography
-                component="h2"
-                sx={{
-                  fontSize: { xs: 20, sm: 24, lg: 32 },
-                  mr: { lg: 6 },
-                  "@media (min-width:1024px) and (max-width:1154px)": {
-                    mr: 0,
-                    textAlign: "center",
-                  },
-                }}
-              >
-                Anslatíon
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: { xs: 15, sm: 16, lg: 20 },
-                  mb: 2,
-                  lineHeight: 1.6,
-                  color: "rgba(255,255,255,0.9)",
-                }}
-              >
-                Driven by Questions.
-                <br />
-                Delivered as Solutions.
-              </Typography>
-
-              {/* Social Icons */}
-              <Stack direction="row" spacing={1.5} sx={{ mt: 3 }}>
-                {socialIcons.map((icon) => (
-                  <Link
-                    key={icon.alt}
-                    href="#"
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      transition: "opacity 0.2s",
-                      "&:hover": { opacity: 0.7 },
-                    }}
-                    aria-label={icon.alt}
-                  >
-                    <Box
-                      component="img"
-                      src={icon.src}
-                      alt={icon.alt}
-                      sx={{ width: 20, height: 20 }}
-                    />
-                  </Link>
-                ))}
-              </Stack>
-            </Grid>
-
-            {/* Links Section */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Grid container spacing={{ xs: 3, sm: 4, md: 3 }}>
-                {/* Product */}
-                <Grid item xs={12} sm={6} md={3}>
-                  <Typography
-                    sx={{
-                      fontSize: { xs: 18, sm: 20, md: 22 },
-                      fontWeight: 700,
-                      mb: { xs: 1.5, md: 2 },
-                    }}
-                  >
-                    Product
-                  </Typography>
-                  <Stack spacing={1.5}>
-                    {footerLinks.product.map((link) => (
-                      <Link
-                        key={link.label}
-                        href={link.href}
-                        color="inherit"
-                        underline="hover"
-                        sx={{
-                          fontSize: { xs: 15, sm: 16, md: 17 },
-                          color: "rgba(255,255,255,0.85)",
-                          transition: "color 0.2s",
-                          "&:hover": { color: "white" },
-                        }}
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-                  </Stack>
-                </Grid>
-
-                {/* Service */}
-                <Grid item xs={12} sm={6} md={3}>
-                  <Typography
-                    sx={{
-                      fontSize: { xs: 18, sm: 20, md: 22 },
-                      fontWeight: 700,
-                      mb: { xs: 1.5, md: 2 },
-                    }}
-                  >
-                    Service
-                  </Typography>
-                  <Stack spacing={1.5}>
-                    {footerLinks.service.map((link) => (
-                      <Link
-                        key={link.label}
-                        href={link.href}
-                        color="inherit"
-                        underline="hover"
-                        sx={{
-                          fontSize: { xs: 15, sm: 16, md: 17 },
-                          color: "rgba(255,255,255,0.85)",
-                          transition: "color 0.2s",
-                          "&:hover": { color: "white" },
-                        }}
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-                  </Stack>
-                </Grid>
-
-                {/* Company */}
-                <Grid item xs={12} sm={6} md={3}>
-                  <Typography
-                    sx={{
-                      fontSize: { xs: 18, sm: 20, md: 22 },
-                      fontWeight: 700,
-                      mb: { xs: 1.5, md: 2 },
-                    }}
-                  >
-                    Company
-                  </Typography>
-                  <Stack spacing={{ xs: 0.6, sm: 1, md: 1.4, lg: 2 }}>
-                    {footerLinks.company.map((link) => (
-                      <Link
-                        key={link.label}
-                        href={link.href}
-                        color="inherit"
-                        underline="hover"
-                        sx={{
-                          fontSize: { xs: 16, sm: 17, md: 18 },
-                          transition: "color 0.2s",
-                          "&:hover": { color: "white" },
-                        }}
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-                  </Stack>
-                </Grid>
-
-                {/* Contact */}
-                <Grid item xs={12} sm={6} md={3}>
-                  <Typography
-                    sx={{
-                      fontSize: { xs: 18, sm: 20, md: 22 },
-                      fontWeight: 700,
-                      mb: { xs: 1.5, md: 2 },
-                    }}
-                  >
-                    Contact Us
-                  </Typography>
-                  <Stack spacing={1.5}>
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <Email sx={{ fontSize: 18 }} />
-                      <Typography
-                        sx={{
-                          fontSize: { xs: 15, sm: 16, md: 17 },
-                          color: "rgba(255,255,255,0.85)",
-                          wordBreak: "break-word",
-                        }}
-                      >
-                        help@anslation.com
-                      </Typography>
-                    </Stack>
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <Phone sx={{ fontSize: 18 }} />
-                      <Typography
-                        sx={{
-                          fontSize: { xs: 15, sm: 16, md: 17 },
-                          color: "rgba(255,255,255,0.85)",
-                        }}
-                      >
-                        (414) 687 - 5892
-                      </Typography>
-                    </Stack>
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <LocationOn sx={{ fontSize: 18 }} />
-                      <Typography
-                        sx={{
-                          fontSize: { xs: 15, sm: 16, md: 17 },
-                          color: "rgba(255,255,255,0.85)",
-                        }}
-                      >
-                        Betul | Gurugram
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-
-          <Divider
-            sx={{
-              borderColor: "rgba(255,255,255,0.2)",
-              my: { xs: 4, md: 6 },
-            }}
-          />
-
-          {/* Bottom Section */}
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", sm: "row" },
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: 2,
-              color: "rgba(255,255,255,0.85)",
-            }}
-          >
-            <Typography sx={{ fontSize: { xs: 14, sm: 16 } }}>
-              Copyright © 2025
+       <Box
+      component="footer"
+      sx={{
+        width: "100%",
+        background: "#000000",
+        color: "#ffffff",
+        pt: "60px",
+        pb: "30px",
+        px: "80px",
+        fontFamily: "Helvetica Neue",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+        <Container maxWidth="xl" sx={{ width: "1440px" }}>
+          <Grid container spacing={20}>
+    {/* Brand */}
+    <Grid item xs={12} md={3}>
+      <img
+              src="/logo-white.svg"
+              alt="logo"
+              style={{ width: 85, marginBottom: 20 }}
+            />
+      <Typography sx={{ fontSize: "16px", lineHeight: 1.6, mb: 3 }}>
+              Driven by Questions.
+              <br />
+              Delivered as Solutions.
             </Typography>
 
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2 }}
-              alignItems="center"
-              sx={{ fontSize: { xs: 14, sm: 16 } }}
-            >
-              <Typography>All Rights Reserved</Typography>
-              <Box sx={{ display: { xs: "none", sm: "block" }, opacity: 0.6 }}>
-                |
-              </Box>
-              <Link href="#" color="inherit" underline="hover">
-                Terms and Conditions
-              </Link>
-              <Box sx={{ display: { xs: "none", sm: "block" }, opacity: 0.6 }}>
-                |
-              </Box>
-              <Link href="#" color="inherit" underline="hover">
-                Privacy Policy
-              </Link>
+      {/* Social Icons */}
+        {/* <Stack direction="row" spacing={2}>
+      {socialIcons.map((icon, i) => (
+        <Box
+          key={i}
+          sx={{
+            width: 32,
+            height: 32,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "15%",
+            backgroundColor: "#1F2937",
+            cursor: "pointer",
+            transition: "transform 0.3s, background-color 0.3s",
+            "&:hover": {
+              transform: "scale(1.2)",
+              backgroundColor: "#1F2937",
+            },
+          }}
+        >
+          <Box
+            component="img"
+            src={icon.src}
+            alt={icon.alt}
+            sx={{ width: 16, height: 16}}
+          />
+        </Box>
+      ))}
+    </Stack> */}
+
+
+    <Stack direction="row" spacing={2}>
+  {socialIcons.map((icon, i) => (
+    <Box
+      key={i}
+      sx={{
+        width: 32,
+        height: 32,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: "15%",
+        backgroundColor: "#1F2937",
+        cursor: "pointer",
+        transition: "all 0.35s ease",
+        boxShadow: "0 0 0 rgba(0,0,0,0)",
+
+        "&:hover": {
+          transform: "scale(1.18)",
+          background:
+            icon.alt === "Facebook"
+              ? "#1877F2"
+              : icon.alt === "Instagram"
+              ? "linear-gradient(45deg, #515BD4, #8134AF, #DD2A7B, #FEDA77, #F58529)"
+              : icon.alt === "LinkedIn"
+              ? "#0A66C2"
+              : icon.alt === "Twitter"
+              ? "#1DA1F2"
+              : icon.alt === "YouTube"
+              ? "#FF0000"
+              : "#1F2937",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
+        },
+      }}
+    >
+      <Box
+        component="img"
+        src={icon.src}
+        alt={icon.alt}
+        sx={{ width: 16, height: 16 }}
+      />
+    </Box>
+  ))}
+</Stack>
+
+    </Grid>
+
+    {/* Product */}
+   <Grid item xs={6} md={2.25}>
+            <Typography sx={{ fontWeight: 600, mb: 2 }}>Product</Typography>
+            <Stack spacing={1}>
+              {["Ads-astra", "Anslatíon tools", "OS Anslation", "K-tech tool", "Trackers"].map((x) => (
+                <Link key={x} underline="hover" color="#9DA3AF" sx={{ fontSize: "16px" }}>
+                  {x}
+                </Link>
+              ))}
             </Stack>
-          </Box>
+          </Grid>
+
+
+          
+
+    {/* Service */}
+    <Grid item xs={6} md={2.25}>
+            <Typography sx={{ fontWeight: 600, mb: 2 }}>Service</Typography>
+            <Stack spacing={1}>
+              {["Performance Analytics", "Software Infrastructure", "Marketing Automation", "Chat support"].map((x) => (
+                <Link key={x} underline="hover" color="#9DA3AF" sx={{ fontSize: "16px" }}>
+                  {x}
+                </Link>
+              ))}
+            </Stack>
+          </Grid>
+
+    {/* Company */}
+     <Grid item xs={6} md={2.25}>
+            <Typography sx={{ fontWeight: 600, mb: 2 }}>Company</Typography>
+            <Stack spacing={1}>
+              {["About", "Contact us", "Careers", "Culture", "Blog"].map((x) => (
+                <Link key={x} underline="hover" color="#9DA3AF" sx={{ fontSize: "16px" }}>
+                  {x}
+                </Link>
+              ))}
+            </Stack>
+          </Grid>
+
+
+
+ <Grid item xs={6} md={2.25}>
+            <Typography sx={{ fontWeight: 600, mb: 2 }}>Contacts Us</Typography>
+            <Stack spacing={1}>
+              {[" we@anslation.com", " 012-345-6789", "Betul | Gurugram"].map((x) => (
+                <Link key={x} underline="hover" color="#9DA3AF" sx={{ fontSize: "16px" }}>
+                  {x}
+                </Link>
+              ))}
+            </Stack>
+          </Grid>
+
+
+
+
+
+
+
+
+
+
+          {/* Contact */}
+           {/* <Grid item xs={6} md={2.25}>
+            <Typography sx={{ fontWeight: 600, mb: 2 }}>Contacts us</Typography>
+            <Stack spacing={1}>
+              <Typography sx={{ fontSize: "14px", color: "#9DA3AF" }}>
+                we@anslation.com
+              </Typography>
+
+              <Typography sx={{ fontSize: "14px", color:"#9DA3AF" }}>
+                012-345-6789
+              </Typography>
+
+              <Typography sx={{ fontSize: "14px", color: "#9DA3AF"}}>
+                Betul | Gurugram
+              </Typography>
+            </Stack>
+          </Grid> */}
+  </Grid>
+
+  {/* Divider */}
+  <Divider sx={{ borderColor: "rgba(255,255,255,0.18)", my: 4 }} />
+
+  {/* Bottom Row */}
+   <Stack
+          direction="row"
+          spacing={1.5}
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ fontSize: "13px", color: "#d7d7d7" }}
+        >
+          <Typography>Copyright © 2025 Anslatíon. All Rights Resreved</Typography>
+
+          <Stack direction="row" spacing={2}>
+            <Link underline="hover" color="#d7d7d7">
+              Terms and Conditions
+            </Link>
+            <Divider orientation="vertical" flexItem sx={{ borderColor: "rgba(255,255,255,0.4)" }} />
+            <Link underline="hover" color="#d7d7d7">
+              Privacy Policy
+            </Link>
+          </Stack>
+        </Stack>
         </Container>
 
         {/* 💬 Floating Chat Icon + Text */}
@@ -398,6 +350,8 @@ export default function Footer() {
           </Box>
         )}
       </Box>
+
+      
     </div>
   );
 }
