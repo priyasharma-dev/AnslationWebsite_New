@@ -87,7 +87,7 @@ export default function MainLayout() {
      
       <div style={{ ...styles.content }}>
       <Always />
-      <Footer />
+      <Footer/>
       </div>
     </div>
   )

@@ -78,7 +78,7 @@ function Always() {
         background: "linear-gradient(180deg, #0E1629 0%, #050A1C 100%)",
         overflow: "hidden",
         display: "block",
-    position: "absolute",
+    position: "relative",
     minHeight: "auto",
       }}
     >
