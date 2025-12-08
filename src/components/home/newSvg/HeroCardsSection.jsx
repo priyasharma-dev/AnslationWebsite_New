@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 
@@ -52,25 +52,24 @@ const CARD_OFFSETS = [
 const MotionBox = motion.create(Box);
 
 // total block (card + label) sizes from Figma
-const getCardSize = (label) => {
-  // 94 × 126 – Software, Products, Micro Tools, Marketing, Inventory, Services
-  const smallCards = [
-    "Software",
-    "Products",
-    "Micro Tools",
-    "Marketing",
-    "Inventory",
-    "Services",
-  ];
+const getCardSize = (label) => ({
+   width: { xs: 94, md: 94, lg: 94 },
+  height: { xs: 126, md: 126, lg: 126 },
+});
 
-  // fallback
-  return {
-    width: { xs: 94, md: 94, lg: 94 },
-    height: { xs: 126, md: 126, lg: 126 },
-  };
-};
+const POP_DURATION = 0.8; // time each card takes to pop
+const OVERLAP = 0.2;
 
 const HeroCardsSection = () => {
+   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % cards.length);
+    }, POP_DURATION * 1000 - OVERLAP * 1000); // slightly faster to create wave effect
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Box
       sx={{
@@ -101,6 +100,9 @@ const HeroCardsSection = () => {
             label={card.label}
             href={card.href}
             offset={CARD_OFFSETS[index] ?? 0}
+             isActive={index === activeIndex}
+
+
           />
         ))}
       </Box>
@@ -108,55 +110,47 @@ const HeroCardsSection = () => {
   );
 };
 
-const FloatingCard = ({ icon, label, href, offset, index }) => {
+const FloatingCard = ({ icon, label, href, offset, index, isActive }) => {
   const { width, height } = getCardSize(label);
-   const isProducts = label === "Products";
- const handleClick = (e) => {
-    if (!isProducts) return; // let other cards behave as normal links
+ 
 
-    // special behavior for Products: show section + scroll
-    e.preventDefault();
+  // const isProducts = label === "Products";
+   const handleClick = (e) => {
+     if (!isProducts) return;
 
-    const section = document.getElementById("our-products");
-    if (section) {
-      section.classList.remove("op-section--hidden");
-      section.classList.add("op-section--visible");
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-   
-
+     e.preventDefault();
+     const section = document.getElementById("our-products");
+     if (section) {
+       section.classList.remove("op-section--hidden");
+       section.classList.add("op-section--visible");
+       section.scrollIntoView({ behavior: "smooth", block: "start" });
+     }
+   };
+  
   return (
     <MotionBox
       component="a"
       href={href}
       aria-label={label}
        onClick={handleClick} 
-      initial={{ opacity: 0, y: offset + 40, scale: 0.9 }}
-      animate={{ opacity: 1, y: offset, scale: 1 }}
+      initial={{ y: offset, scale: 1 }}
+      animate={
+        isActive
+          ? {scale: [1, 1.19, 1]  }
+          : {  scale: 1 }
+      }
       transition={{
-        duration: 0.45,
-        delay: index * 0.08,
-        ease: "easeOut",
+        duration: POP_DURATION,
+        ease: [0.5, 0, 0.2, 1], 
       }}
-      whileHover={{
-        y: offset - 6,
-        scale: 1.03,
-        boxShadow: "0 0 26px rgba(0, 180, 255, 0.9)",
-        transition: { duration: 0.18 },
-      }}
-      whileTap={{
-        y: offset - 2,
-        scale: 0.99,
-        transition: { duration: 0.12 },
-      }}
+      
       sx={{
         display: "flex",
-        flexDirection: "column", // logo card + label stacked
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "flex-start",
         width,
-        height, // total block = Figma Hug height
+        height, 
         textDecoration: "none",
         cursor: "pointer",
         pointerEvents: "auto",
@@ -187,13 +181,12 @@ const FloatingCard = ({ icon, label, href, offset, index }) => {
       <Typography
         variant="caption"
         sx={{
-          mt: 1, // 8px gap
+          mt: 1,
           color: "#FFFFFF",
           fontFamily:
             '"Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
           fontWeight: 500,
           fontSize: "12px",
-          // lineHeight: "24px",
           letterSpacing: 0,
           textAlign: "center",
           whiteSpace: "normal",
